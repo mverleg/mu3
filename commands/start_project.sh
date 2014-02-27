@@ -17,6 +17,7 @@ if ! [ -d ".git" ];
 then
 	printf "creating git repository and making initial commit\n";
 	git init;
+	printf "env/\n*.pyc" > .gitignore;
 fi
 
 git add -A;
@@ -25,8 +26,8 @@ git commit -m "initial commit for '$name'";
 if ! [ -d "env" ];
 then
 	virtualenv env;
-	source ./env/bin/activate;
 fi
+source env/bin/activate;
 
 pip install https://bitbucket.org/mverleg/mu3/get/tip.tar.gz;
 
