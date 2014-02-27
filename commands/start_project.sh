@@ -28,7 +28,7 @@ then
 	source ./env/bin/activate;
 fi
 
-pip install django;
+pip install https://bitbucket.org/mverleg/mu3/get/tip.tar.gz;
 
 
 
