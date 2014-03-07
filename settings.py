@@ -2,17 +2,26 @@
     base settings for mu3-derived projects
 '''
 
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+from django.conf.global_settings import *  # @UnusedWildImport
+from os import path
+BASE_DIR = path.dirname(path.dirname(__file__))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'r)l3tp$w*1jint8icsife^ch3$xurc4z&l^abo9xtlx!9_+*mi'
+
+TEMPLATE_CONTEXT_PROCESSORS += ('admin_settings.context_processors.admin_settings', )
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', 
+        'NAME': '%s/data/default.sqlite3' % BASE_DIR,
+    }
+}
+
+''' path of the site-wide base template, which should contain a {% block content %} '''
+BASE_TEMPLATE = 'mu3_base.html'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'admin_settings',
+    
 )
 
 MIDDLEWARE_CLASSES = (
@@ -46,16 +57,23 @@ ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+# johhny database cache does not work in Django 1.6 yet, turn this on when it does
+if False:
+    MIDDLEWARE_CLASSES = (
+        'johnny.middleware.LocalStoreClearMiddleware',
+        'johnny.middleware.QueryCacheMiddleware',
+    ) + MIDDLEWARE_CLASSES
+    
+    CACHES = {
+        'default' : dict(
+             BACKEND = 'johnny.backends.memcached.MemcachedCache',
+             LOCATION = ['127.0.0.1:11211'],
+             JOHNNY_CACHE = True,
+        )
     }
-}
+    
+    JOHNNY_MIDDLEWARE_KEY_PREFIX = 'jc_admin_settings' # automatically
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -75,3 +93,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+

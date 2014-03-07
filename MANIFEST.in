@@ -1,1 +1,4 @@
-recursive-include . *
+recursive-include source *
+recursive-include static *
+recursive-include language *
+recursive-include data *
