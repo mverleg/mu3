@@ -96,7 +96,7 @@ git add -A;
 git commit -m "directory structure for '$name'";
 
 printf 'creating modules %s\n' "$name";
-pip install django six django-dbsettings johnny-cache;
+pip install django six django-dbsettings johnny-cache git+https://bitbucket.org/mverleg/django_admin_settings;
 pip freeze > dev/modules.pip
 
 

@@ -11,7 +11,10 @@ BASE_DIR = path.dirname(path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 
-TEMPLATE_CONTEXT_PROCESSORS += ('admin_settings.context_processors.admin_settings', )
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+    'admin_settings.context_processors.admin_settings', 
+)
 
 DATABASES = {
     'default': {
@@ -29,7 +32,6 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -93,5 +95,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 

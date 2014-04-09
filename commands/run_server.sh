@@ -58,7 +58,7 @@ kill $(lsof -t -i:8000) 2>/dev/null;
 kill $(lsof -t -i:8001) 2>/dev/null;
 kill $(lsof -t -i:8443) 2>/dev/null;
 
-printf "deactivating virtual environment\n";
-deactivate;
+#printf "deactivating virtual environment\n";
+#deactivate;
 
 

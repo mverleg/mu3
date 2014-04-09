@@ -14,4 +14,9 @@ BASE_DIR = path.dirname(path.dirname(__file__))
 ''' path of the site-wide base template, which should contain a {% block content %} '''
 BASE_TEMPLATE = 'mu3_base.html'
 
+INSTALLED_APPS += (
+)
+
+MEDIA_ROOT = path.join(BASE_DIR, 'data')
+
 
