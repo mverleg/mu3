@@ -88,18 +88,22 @@ then
 	cat dev/ssl/devssl.key dev/ssl/devssl.cert > dev/ssl/devssl.pem;
 fi
 
-printf 'creating Django project %s\n' "$name";
-python manage.py syncdb --noinput;
-
 printf 'adding changes to git\n';
 git add -A;
 git commit -m "directory structure for '$name'";
 
-printf 'creating modules %s\n' "$name";
-pip install django six django-dbsettings johnny-cache git+https://bitbucket.org/mverleg/django_admin_settings;
-pip freeze > dev/modules.pip
+printf 'installing modules for %s\n' "$name";
+#pip install django six django-dbsettings johnny-cache git+https://bitbucket.org/mverleg/django_admin_settings;
+pip install $(cat "$dir/files/pip_list") 1> /dev/null;
+if [ -f "dev/modules.pip" ];
+then
+	pip install $(cat dev/modules.pip) 1> /dev/null;
+else
+	pip freeze > dev/modules.pip;
+fi
 
-
+printf 'creating Django project %s\n' "$name";
+python manage.py syncdb --noinput;
 
 printf 'adding changes to git\n';
 git add -A;

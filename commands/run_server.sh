@@ -28,6 +28,8 @@ kill $(lsof -t -i:8443) 2>/dev/null;
 printf 'activating virtual environment\n';
 source ./env/bin/activate;
 
+printf 'make sure memcached is running\n  sudo service memcached start;\n';
+
 printf "starting ssl server\n";
 stunnel4 dev/ssl/devssl.conf &> /dev/null &
 stunnel_pid=$!;

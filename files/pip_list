@@ -1,0 +1,5 @@
+django
+six
+pylibmc
+dogpile.cache
+django-reversion

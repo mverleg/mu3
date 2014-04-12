@@ -2,6 +2,7 @@
     base settings for mu3-derived projects
 '''
 
+from dogpile.cache import make_region  # @UnresolvedImport
 from django.conf.global_settings import *  # @UnusedWildImport
 from os import path
 BASE_DIR = path.dirname(path.dirname(__file__))
@@ -9,6 +10,15 @@ BASE_DIR = path.dirname(path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+
+
+mem_cache = make_region().configure(
+    'dogpile.cache.pylibmc',
+    expiration_time = 150,
+    arguments = {
+        'url':['127.0.0.1'],
+    }
+).cache_on_arguments()
 
 
 TEMPLATE_CONTEXT_PROCESSORS += (
@@ -42,7 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'admin_settings',
+    #'admin_settings',
     
 )
 
@@ -60,6 +70,7 @@ ROOT_URLCONF = 'urls'
 WSGI_APPLICATION = 'wsgi.application'
 
 # johhny database cache does not work in Django 1.6 yet, turn this on when it does
+"""
 if False:
     MIDDLEWARE_CLASSES = (
         'johnny.middleware.LocalStoreClearMiddleware',
@@ -75,7 +86,7 @@ if False:
     }
     
     JOHNNY_MIDDLEWARE_KEY_PREFIX = 'jc_admin_settings' # automatically
-
+"""
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
