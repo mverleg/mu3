@@ -36,10 +36,14 @@ DATABASES = {
 ''' path of the site-wide base template, which should contain a {% block content %} '''
 BASE_TEMPLATE = 'mu3_base.html'
 
+TEMPLATE_LOADERS = (
+    'django.template.loaders.app_directories.Loader',
+)
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -52,7 +56,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'admin_settings',
+    'admin_settings',
     
 )
 
