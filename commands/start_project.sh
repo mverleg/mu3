@@ -101,6 +101,7 @@ then
 else
 	pip freeze > dev/modules.pip;
 fi
+pip install git+https://bitbucket.org/mverleg/django_admin_settings;
 
 printf 'creating Django project %s\n' "$name";
 python manage.py syncdb --noinput;

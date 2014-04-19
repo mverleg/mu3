@@ -1,5 +1,5 @@
 
-from app.views.my_view import my_view
+from views.my_view import my_view
 from django.conf.urls import patterns, url
 
 

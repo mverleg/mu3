@@ -9,15 +9,13 @@ dir="$( dirname $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ))";
 if [ -z "$1" ];
 then
 	printf "provide an app name\n";
-	return 2> /dev/null;
-	exit;
+	return;
 fi;
 
 if [ -d "source/$1" ];
 then
 	printf "'$1' already exists\n";
-	return 2> /dev/null;
-	exit;
+	return;
 fi;
 
 printf "creating app '$1'\n";
