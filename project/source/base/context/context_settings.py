@@ -1,6 +1,4 @@
 
-import settings
-print settings.__file__
 from settings import BASE_TEMPLATE
 
 

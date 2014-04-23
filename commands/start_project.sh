@@ -101,7 +101,9 @@ then
 else
 	pip freeze > dev/modules.pip;
 fi
+pip install git+https://bitbucket.org/mverleg/django_split_models;
 pip install git+https://bitbucket.org/mverleg/django_admin_settings;
+pip install git+https://bitbucket.org/mverleg/django_syncdb_completed;
 
 printf 'creating Django project %s\n' "$name";
 python manage.py syncdb --noinput;

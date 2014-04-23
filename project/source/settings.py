@@ -12,11 +12,14 @@ from os import path
 BASE_DIR = path.dirname(path.dirname(__file__))
 
 ''' path of the site-wide base template, which should contain a {% block content %} '''
-print '\n\n   SETTINGS NOW!!\n\n'
-BASE_TEMPLATE = 'mu3_base.html'
+BASE_TEMPLATE = 'base.html'
+
+AUTH_USER_MODEL = 'account.MuUser'
 
 INSTALLED_APPS += (
     'base',
+    'account',
+    'testapp',
 )
 
 MEDIA_ROOT = path.join(BASE_DIR, 'data')
