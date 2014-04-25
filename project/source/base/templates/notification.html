@@ -4,7 +4,16 @@
 
 {% block content %}
 	
-	no content yet...
+	{% if subject %}
+		<h1>{{ subject }}</h1>
+	{% endif %}
+	
+	<p>{{ message }}</p>
+	
+	<a href="{% url 'home' %}" class="btn btn-success btn-large"><i class="icon-white icon-ok"></i> Okay</a>
+	{% if next %}
+		<a href="{{ next }}" class='btn btn-primary btn-large'><i class='icon-white icon-play'></i> Next</a>
+	{% endif %}
 	
 {% endblock content %}
 

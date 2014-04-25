@@ -1,4 +1,6 @@
 
+from django.shortcuts import render, redirect
+
 
 '''
     show a simple notification

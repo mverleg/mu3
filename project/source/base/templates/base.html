@@ -1,18 +1,51 @@
+
+{% load staticfiles %}
+
+
 <!DOCTYPE html>
 <html>{# possibly add lang='en' #}
 	<head>
 		<meta charset='utf-8'>
-		<title>title</title>
-		<link rel='stylesheet' href='base.css'>
-		<script src='jquery-2-1-0.js'></script>
-		<script src='base.js'></script>
+		<title>{% block title %}title{% endblock title %}</title>
+		<link rel='stylesheet' href='{% static 'meyer-reset.css' %}'>
+		<link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' />
+		<link rel='stylesheet' href='{% static 'aqua-style.css' %}'>
+		<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
+		<script src='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
+		<script src='{% static 'aqua-script.js' %}'></script>
+		{% block header %}
+			<link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+		{% endblock header %}
 	</head>
 	<body>
-		{% block content %}
-			
-			empty document
-			
-		{% endblock content %}
+		<div id='menu_bar'>
+			<ol id='menu_bar_left'>
+				{% block menu_left %}
+					<li><a href='{% url 'home' %}'>home</a></li>
+					<li><a>items</a></li>
+				{% endblock menu_left %}
+			</ol>
+			<ol id='menu_bar_right'>
+				{% block menu_right %}
+					{% if request.user.is_authenticated %}
+						<li class='unclickable'><a>welkom {{ request.user }}</a></li>
+						<li><a href='{% url 'logout' %}'>logout</a></li>
+						<li><a href='{% url 'profile' %}'>account</a></li>
+					{% else %}
+						<li><a href='{% url 'login' %}'>login</a></li>
+					{% endif %}
+					<li><a>stuffs</a></li>
+				{% endblock menu_right %}
+			</ol>
+			<br class='clear' />
+		</div>
+		<div id='page'>
+			{% block content %}
+				
+				empty document
+				
+			{% endblock content %}
+		</div>
 	</body>
 </html>
 
