@@ -28,4 +28,10 @@ TEMPLATE_CONTEXT_PROCESSORS += (
     'base.context.context_settings.context_settings',
 )
 
+EMAIL_HOST = 'smtp.mail.google.com'
+EMAIL_HOST_USER = 'markdjangosmtptest424'
+EMAIL_HOST_PASSWORD = 'ta7hbjv4762F'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 

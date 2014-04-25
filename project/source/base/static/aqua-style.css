@@ -3,6 +3,7 @@
 
 /* colors:
 	dark:   #03415B
+	d-ish:	#2C6C87
 	middle: #98CDF3
 	light:  #E1F2FD
 	white:	#FAFFFF
@@ -76,7 +77,7 @@ body
 	min-width: 3em;
 }
 
-#menu_bar ol li:not(.unclickable):hover
+#menu_bar ol li:not(.unclickable):hover, .menu_active:hover
 {
 	background-color: #03415B;
 	cursor: pointer;
@@ -89,6 +90,11 @@ body
 	color: inherit;
 }
 
+.menu_active
+{
+	font-weight: bold;
+}
+
 
 #page
 {
@@ -99,20 +105,31 @@ body
 	min-height: 500px;
 }
 
+a
+{
+	color: #2C6C87;
+}
+
+a:hover
+{
+	color: #03415B;
+}
+
+h1, h2
+{
+	color: #03415B;
+	font-weight: bold;
+}
 
 h1
 {
-	color: #03415B;
 	font-size: 200%;
-	font-weight: bold;
 }
 
 h2
 {
-	color: #03415B;
 	font-size: 160%;
 	margin-top: .6em;
-	font-weight: bold;
 }
 
 p 
