@@ -13,7 +13,7 @@ class Command(BaseCommand):
     )
     help = 'type the command and see'
     
-    def handle(self, **options):
+    def handle(self, *args, **options):
         pass
 
 

@@ -3,3 +3,5 @@ six
 pylibmc
 dogpile.cache
 django-reversion
+django_crispy_forms
+
