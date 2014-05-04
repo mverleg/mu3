@@ -15,7 +15,7 @@ class RegistrationForm(forms.ModelForm):
     
     class Meta:
         model = get_user_model()
-        fields = ('username', 'email',)
+        fields = ('email',)
     
     def clean_password_confirm(self):
         password = self.cleaned_data.get('password')

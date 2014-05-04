@@ -19,7 +19,7 @@ AUTH_USER_MODEL = 'account.MuUser'
 INSTALLED_APPS += (
     'base',
     'account',
-    'testapp',
+    #'testapp',
 )
 
 MEDIA_ROOT = path.join(BASE_DIR, 'data')
