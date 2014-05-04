@@ -28,6 +28,14 @@ kill $(lsof -t -i:8443) 2>/dev/null;
 printf 'activating virtual environment\n';
 source ./env/bin/activate;
 
+if [[ -e "init.sh" ]];
+then
+	printf "source init.sh\n";
+	source init.sh;
+else
+	printf "init.sh not found; skipping\n";
+fi
+
 printf 'make sure memcached is running\n  sudo service memcached start;\n';
 
 printf "starting ssl server\n";
@@ -62,5 +70,6 @@ kill $(lsof -t -i:8443) 2>/dev/null;
 
 #printf "deactivating virtual environment\n";
 #deactivate;
+
 
 
