@@ -39,9 +39,6 @@ class MuUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default = False, help_text = 'Designates whether the user can log into this admin site.')
     date_joined = models.DateTimeField('date joined', default = now)
     
-    ''' chem4fun '''
-    employee = models.BooleanField(default = False, help_text = 'Is an employee of the company (as opposed to a customer)')
-    
     objects = MuUserManager()
     
     USERNAME_FIELD = 'email'

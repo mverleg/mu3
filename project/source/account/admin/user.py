@@ -77,7 +77,7 @@ class MuUserAdmin(UserAdmin):
         ),
     )
     search_fields = ('first_name', 'last_name', 'email')
-    ordering = ('employee', 'email',)
+    ordering = ('email',)
     list_display = ('get_full_name', 'email', 'first_name', 'last_name', 'is_staff')
     list_filter = ('is_staff', 'is_superuser', 'groups')
     
