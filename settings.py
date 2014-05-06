@@ -37,6 +37,7 @@ DATABASES = {
 BASE_TEMPLATE = 'mu3_base.html'
 
 TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 )
 
@@ -54,7 +55,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
+    #'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
     'admin_settings',
@@ -65,7 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    #'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 

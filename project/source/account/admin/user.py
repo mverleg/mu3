@@ -8,7 +8,6 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.contrib.auth.admin import UserAdmin
 from account.models.user import MuUser
-#from location.admin.address import AddressAdmin
 
 
 class MuUserChangeForm(ModelForm):
@@ -65,10 +64,8 @@ class MuUserAdmin(UserAdmin):
     fieldsets = (
         ('Login', {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name')}),
-        #('Address', {'fields': ('street_name', 'street_nr', 'city', 'postal_code', 'country')}),
-        ('Address', {'fields': ('address',)}),
         ('Permissions', {'fields': ('is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        #('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
         (None, {

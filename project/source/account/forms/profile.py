@@ -13,13 +13,13 @@ class ProfileForm(forms.ModelForm):
     
     class Meta:
         model = get_user_model()
-        fields = ('email',)
+        fields = ('first_name', 'last_name',)
     
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_action = 'profile_submit'
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.add_input(Submit('submit', 'Change'))
         super(ProfileForm, self).__init__(*args, **kwargs)
-        self.fields['email'].required = True
+        #self.fields['email'].required = True
 
 

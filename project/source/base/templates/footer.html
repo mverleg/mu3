@@ -1,0 +1,7 @@
+{% block footer %}
+	{% if request.user.is_staff %}
+		<a href="/admin/">admin</a> / 
+	{% endif %}
+	<a href="{% url 'credits' %}">credits</a> / 
+	<a href="{% url 'contact' %}">contact</a>
+{% endblock footer %}

@@ -13,6 +13,7 @@ class RegistrationForm(forms.ModelForm):
     password = forms.CharField(label = 'Password', widget = forms.PasswordInput)
     password_confirm = forms.CharField(label = 'Password confirmation', widget = forms.PasswordInput)
     
+    
     class Meta:
         model = get_user_model()
         fields = ('email',)
@@ -35,7 +36,7 @@ class RegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_action = 'register'
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.add_input(Submit('submit', 'Register'))
         super(RegistrationForm, self).__init__(*args, **kwargs)
         self.fields['email'].required = True
 

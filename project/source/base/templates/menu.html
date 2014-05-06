@@ -1,0 +1,23 @@
+
+{% load menu %}
+
+
+<ol id='menu_bar_left'>
+	{% block menu_left %}
+		<li><a class="{% conditional_active_class 'home' %}" href='{% url 'home' %}'>home</a></li>
+		<li><a>items</a></li>
+	{% endblock menu_left %}
+</ol>
+<ol id='menu_bar_right'>
+	{% block menu_right %}
+		{% if request.user.is_authenticated %}
+			<li class='unclickable'><a>welkom {{ request.user }}</a></li>
+			<li><a class="{% conditional_active_class 'logout' %}" href='{% url 'logout' %}?next={{ request.path }}'>logout</a></li>
+			<li><a class="{% conditional_active_class 'profile' %}" href='{% url 'profile' %}'>account</a></li>
+		{% else %}
+			<li><a class="{% conditional_active_class 'login' %}" href='{% url 'login' %}?next={{ request.path }}'>login</a></li>
+		{% endif %}
+		<li><a>stuffs</a></li>
+	{% endblock menu_right %}
+</ol>
+<br class='clear' />

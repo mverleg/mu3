@@ -14,7 +14,7 @@ class PasswordForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_action = 'profile_password'
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.add_input(Submit('submit', 'Change'))
         super(PasswordForm, self).__init__(*args, **kwargs)
 
 

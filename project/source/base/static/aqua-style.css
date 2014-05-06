@@ -1,5 +1,5 @@
 
-# http://colorschemedesigner.com/#3N11Tw0w0w0w0
+/* http://colorschemedesigner.com/#3N11Tw0w0w0w0 */
 
 /* colors:
 	dark:   #03415B
@@ -23,7 +23,7 @@ body
 	/*background-size: cover;*/
 }
 
-#menu_bar, #page
+#menu_bar, #content
 {
 	border: 2px solid #03415B;
 	background-color: #E2F3FE;
@@ -99,10 +99,24 @@ body
 #page
 {
 	margin: 26px auto 0px auto;
-	padding: 2em;
 	min-width: 360px;
 	max-width: 760px;
+}
+
+#content
+{
+	padding: 2em;
 	min-height: 500px;
+}
+
+#footer
+{
+	text-align: right;
+}
+
+#footer a
+{
+	color: #03415B;
 }
 
 a
@@ -132,10 +146,46 @@ h2
 	margin-top: .6em;
 }
 
-p 
+p
 {
 	margin-bottom: 1em;
 	line-height: 135%;
 }
 
+form
+{
+	margin-bottom: 2em;
+}
 
+.obfuscated
+{
+	cursor: help;
+}
+
+
+/*
+	DMIN STUFF
+*/
+#changelist-filter
+{
+	float: right;
+	width: 120px;
+	border-left: 1px solid gray;
+	text-align: right;
+}
+
+#changelist-filter h1, #changelist-filter h2, #changelist-filter h3
+{
+	font-size: inherit;
+	margin: 0px;
+}
+
+#result_list td
+{
+	border: 1px;
+}
+
+.admin h1
+{
+	font-size: inherit;
+}

@@ -1,0 +1,49 @@
+
+{% extends 'admin/base.html' %}
+
+{% load staticfiles %}
+{% load menu %}
+
+
+{% block title %}
+	{{ title }} {{ TITLE_SEPARATOR }} Admin {{ TITLE_SEPARATOR }} {{ TITLE_BASE }}
+{% endblock %}
+
+{% block stylesheet %}{#{% static 'meyer-reset.css' %}#}{% endblock stylesheet %}
+{% block extrastyle %}
+	<link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' />
+	<link rel='stylesheet' href='{% static 'aqua-style.css' %}' />
+	<link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+{% endblock extrastyle %}
+{% block extrahead %}
+	<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
+	<script src='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
+	<script src='{% static 'aqua-script.js' %}'></script>
+{% endblock extrahead %}
+
+{% block branding %}
+<!--<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header }} [changed]</a></h1>-->
+	<div id='menu_bar'>
+		<ol id='menu_bar_left'>
+			{% block menu_left %}
+				<li><a class="{% conditional_active_class 'home' %}" href='{% url 'home' %}'>home</a></li>
+				<li><a>items</a></li>
+			{% endblock menu_left %}
+		</ol>
+		<ol id='menu_bar_right'>
+			{% block menu_right %}
+				{% if request.user.is_authenticated %}
+					<li class='unclickable'><a>welkom {{ request.user }}</a></li>
+					<li><a class="{% conditional_active_class 'logout' %}" href='{% url 'logout' %}?next={{ request.path }}'>logout</a></li>
+					<li><a class="{% conditional_active_class 'profile' %}" href='{% url 'profile' %}'>account</a></li>
+				{% else %}
+					<li><a class="{% conditional_active_class 'login' %}" href='{% url 'login' %}?next={{ request.path }}'>login</a></li>
+				{% endif %}
+				<li><a>stuffs</a></li>
+			{% endblock menu_right %}
+		</ol>
+		<br class='clear' />
+	</div>
+{% endblock %}
+
+

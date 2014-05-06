@@ -2,7 +2,6 @@
 from django.contrib.auth.models import UserManager, AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils.timezone import now
-from location.models.address import Address
 
 
 '''
@@ -12,7 +11,8 @@ class MuUserManager(UserManager):
     
     def _create_user(self, email, password, is_staff, is_superuser, **extra_fields):
         email = self.normalize_email(email)
-        user = self.model(email = email, is_staff = is_staff, is_superuser = is_superuser, last_login = now(), date_joined = now(), **extra_fields)
+        #last_login = now(), date_joined = now(), 
+        user = self.model(email = email, is_staff = is_staff, is_superuser = is_superuser, **extra_fields)
         user.set_password(password)
         user.save(using = self._db)
         return user
@@ -33,11 +33,10 @@ class MuUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(blank = True, unique = True, help_text = 'Email address; also used as login name.')
     first_name = models.CharField(max_length = 30, blank = True)
     last_name = models.CharField(max_length = 30, blank = True)
-    address = models.ForeignKey(Address, blank = True, null = True)
     
     ''' permissions and tracking '''
     is_staff = models.BooleanField(default = False, help_text = 'Designates whether the user can log into this admin site.')
-    date_joined = models.DateTimeField('date joined', default = now)
+    #date_joined = models.DateTimeField('date joined', default = now)
     
     objects = MuUserManager()
     

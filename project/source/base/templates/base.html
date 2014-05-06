@@ -1,50 +1,38 @@
 
 {% load staticfiles %}
-{% load menu %}
+{% load mu3 %}
+
 
 <!DOCTYPE html>
 <html>{# possibly add lang='en' #}
 	<head>
 		<meta charset='utf-8'>
-		<title>{% block title %}title{% endblock title %}</title>
-		<link rel='stylesheet' href='{% static 'meyer-reset.css' %}'>
+		<title>{% block title %}{{ TITLE_BASE }}{% endblock title %}</title>
+		<link rel='stylesheet' href='{% static 'meyer-reset.css' %}' />
 		<link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' />
-		<link rel='stylesheet' href='{% static 'aqua-style.css' %}'>
+		<link rel='stylesheet' href='{% static 'aqua-style.css' %}' />
+		<link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
 		<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
 		<script src='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
 		<script src='{% static 'aqua-script.js' %}'></script>
 		{% block header %}
-			<link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
 		{% endblock header %}
 	</head>
 	<body>
 		<div id='menu_bar'>
-			<ol id='menu_bar_left'>
-				{% block menu_left %}
-					<li><a class="{% conditional_active_class 'home' %}" href='{% url 'home' %}'>home</a></li>
-					<li><a>items</a></li>
-				{% endblock menu_left %}
-			</ol>
-			<ol id='menu_bar_right'>
-				{% block menu_right %}
-					{% if request.user.is_authenticated %}
-						<li class='unclickable'><a>welkom {{ request.user }}</a></li>
-						<li><a class="{% conditional_active_class 'logout' %}" href='{% url 'logout' %}'>logout</a></li>
-						<li><a class="{% conditional_active_class 'profile' %}" href='{% url 'profile' %}'>account</a></li>
-					{% else %}
-						<li><a class="{% conditional_active_class 'login' %}" href='{% url 'login' %}'>login</a></li>
-					{% endif %}
-					<li><a>stuffs</a></li>
-				{% endblock menu_right %}
-			</ol>
-			<br class='clear' />
+			{% include 'menu.html' %}
 		</div>
 		<div id='page'>
-			{% block content %}
-				
-				empty document
-				
-			{% endblock content %}
+			<div id='content'>
+				{% block content %}
+					
+					empty document
+					
+				{% endblock content %}
+			</div>
+			<div id='footer'>
+				{% include 'footer.html' %}
+			</div>
 		</div>
 	</body>
 </html>

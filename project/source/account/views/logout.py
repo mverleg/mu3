@@ -6,26 +6,27 @@ from account.forms.logout import LogoutForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from base.views.notification import notification
-from django.contrib.auth import logout as logout_request
+from django.contrib.auth import logout as auth_logout
+from account.functions.next_get import next_GET
 
 
 '''
 	logs out user through a form (to prevent csrf)
 	#todo: redirect url
 '''
-def logout(request):
+@next_GET
+def logout(request, next):
 	if not request.user.is_authenticated():
 		return redirect(to = reverse('login'))
-	form = LogoutForm(request)
 	if request.method == 'POST':
-		if 'logout' in request.POST:
-			logout_request(request)
-			return redirect(to = reverse('login'))
-		else:
-			raise Exception('That\'s not the logout form')
+		form = LogoutForm(data = request.POST)
+		if form.is_valid():
+			auth_logout(request)
+			return redirect(to = form.cleaned_data['next'])
 	else:
-		return render(request, 'logout.html', {
-			'form': form,
-		})
+		form = LogoutForm(initial = {'next': next})
+	return render(request, 'logout.html', {
+		'form': form,
+	})
 
 
