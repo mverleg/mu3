@@ -14,15 +14,14 @@ from account.functions.next_get import next_GET
 def login(request, next, *args, **kwargs):
 	if request.user.is_authenticated():
 		return redirect(to = reverse('logout'))
+	form = LoginForm(data = request.POST or None, initial = {'next': next})
 	if request.method == 'POST':
-		form = LoginForm(data = request.POST)
 		if form.is_valid():
 			auth_login(request, form.user)
 			return redirect(to = form.cleaned_data['next'])
-	else:
-		form = LoginForm(initial = {'next': next})
 	return render(request, 'login.html', {
 		'form': form,
+		'next': next,
 	})
 
 

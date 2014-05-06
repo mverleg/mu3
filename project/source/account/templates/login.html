@@ -14,8 +14,8 @@
 	<p>If you don't have an account or you forgot it, use one of these:</p>
 	
 	<div>
-		<a href="{% url 'password_reset' %}" class="btn btn-danger btn-large"><i class="icon-white icon-refresh"></i> reset password</a>
-		<a href="{% url 'register' %}" class="btn btn-success btn-large"><i class="icon-white icon-user"></i> register</a>
+		<a href="{% url 'password_reset' %}?next={{ next }}" class="btn btn-danger btn-large"><i class="icon-white icon-refresh"></i> reset password</a>
+		<a href="{% url 'register' %}?next={{ next }}" class="btn btn-success btn-large"><i class="icon-white icon-user"></i> register</a>
 	</div>
 	
 {% endblock content %}

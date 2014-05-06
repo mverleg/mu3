@@ -18,13 +18,11 @@ from account.functions.next_get import next_GET
 def logout(request, next):
 	if not request.user.is_authenticated():
 		return redirect(to = reverse('login'))
+	form = LogoutForm(data = request.POST or None, initial = {'next': next})
 	if request.method == 'POST':
-		form = LogoutForm(data = request.POST)
 		if form.is_valid():
 			auth_logout(request)
 			return redirect(to = form.cleaned_data['next'])
-	else:
-		form = LogoutForm(initial = {'next': next})
 	return render(request, 'logout.html', {
 		'form': form,
 	})

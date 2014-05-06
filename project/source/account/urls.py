@@ -1,6 +1,5 @@
 
 from django.conf.urls import patterns, url
-from base.views.credits import credits
 from views.login import login
 from views.logout import logout
 from views.register import register

@@ -12,7 +12,7 @@ class RegistrationForm(forms.ModelForm):
     
     password = forms.CharField(label = 'Password', widget = forms.PasswordInput)
     password_confirm = forms.CharField(label = 'Password confirmation', widget = forms.PasswordInput)
-    
+    next = forms.CharField(max_length = 128, widget = forms.HiddenInput)
     
     class Meta:
         model = get_user_model()
