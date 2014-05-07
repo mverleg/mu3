@@ -1,5 +1,5 @@
 
-from settings import BASE_TEMPLATE
+from settings import BASE_TEMPLATE, BASE_EMAIL_TEMPLATE
 
 
 '''
@@ -8,6 +8,7 @@ from settings import BASE_TEMPLATE
 def context_settings(request):
     return {
         'BASE_TEMPLATE': BASE_TEMPLATE,
+        'BASE_EMAIL_TEMPLATE': BASE_EMAIL_TEMPLATE,
     }
 
 

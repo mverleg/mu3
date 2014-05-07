@@ -17,5 +17,7 @@ class PasswordForm(PasswordChangeForm):
         self.helper.add_input(Submit('submit', 'Change'))
         super(PasswordForm, self).__init__(*args, **kwargs)
 
-
+'''
+    see also the ResetPasswordForm in forms.reset
+'''
 

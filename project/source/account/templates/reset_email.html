@@ -1,14 +1,13 @@
-{% load i18n %}{% autoescape off %}
-{% blocktrans %}You're receiving this email because you requested a password reset for your user account at {{ site_name }}.{% endblocktrans %}
 
-{% trans "Please go to the following page and choose a new password:" %}
-{% block reset_link %}
-{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
-{% endblock %}
-{% trans "Your username, in case you've forgotten:" %} {{ user.get_username }}
+{% extends BASE_EMAIL_TEMPLATE %}
 
-{% trans "Thanks for using our site!" %}
 
-{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
+{% block content %}{% autoescape off %}You're receiving this email because you requested a password reset for your user account at {{ domain }}.
 
-{% endautoescape %}
+Please go to the following page and choose a new password:
+
+http://{{ domain }}{% url 'password_reset_new' uid=user.pk token=token %}
+
+You can then log in with your email address, {{ user.email }}.{% endautoescape %}{% endblock content %}
+
+

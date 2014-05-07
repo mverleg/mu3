@@ -34,9 +34,10 @@ def profile_submit(request, *args, **kwargs):
 	})
 
 
-@require_POST
 @login_required
 def profile_password(request, *args, **kwargs):
+	if not request.method == 'POST':
+		return redirect(to = reverse('profile'))
 	form_password = PasswordForm(request.user, request.POST)
 	if form_password.is_valid():
 		form_password.save()

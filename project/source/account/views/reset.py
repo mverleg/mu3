@@ -1,97 +1,72 @@
 
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
-from django.contrib.auth import authenticate, login
+from base.views.notification import notification
 from account.models import MuUser
-from account.forms.register import RegistrationForm
-from base.views.notification import notification
-from django.shortcuts import render, redirect
-from django.core.urlresolvers import reverse
-from django.contrib.auth.views import login_required
-from django.views.decorators.http import require_GET, require_POST
-from account.forms.profile import ProfileForm
-from account.forms.password import PasswordForm
-from base.views.notification import notification
+from account.functions.next_get import next_GET, next_GET_or
+from account.forms.reset import RequestResetForm, ResetPasswordForm
+from django.core.mail import send_mail
+from settings import DEFAULT_FROM_EMAIL
+from account.functions.reset import send_reset_link, reset_token
+from django.contrib.auth import get_user_model
 
 
 '''
 	request a password reset email
 '''
+@next_GET
 def reset_request(request, *args, **kwargs):
 	if request.user.is_authenticated():
 		return render(request, 'reset_logged_in.html', {})
-	"""
-	form = RegistrationForm(request.POST or None)
+	form = RequestResetForm(request.POST or None)#, initial = {'next': next})
 	if request.method == 'POST':
 		if form.is_valid():
-			user = form.save()
-			user = authenticate(username = user.email, password = form.cleaned_data['password'])
-			login(request, user)
-			return notification(request, message = 'Your account %s has been created! Welcome to the site!' % user.email, subject = 'Welcome, %s' % user, next = reverse('profile'))
-	return render(request, 'register.html', {
+			''' send an email if the address exists; otherwise still pretend to '''
+			users = MuUser.objects.filter(email = form.cleaned_data['email'])
+			if users:
+				send_reset_link(request, users[0], request.get_host())
+			return redirect(to = reverse('password_reset_sent'))
+	return render(request, 'reset_request.html', {
 		'form': form,
 	})
-	"""
 
 '''
 	password reset email has been sent
 '''
+@next_GET_or('login')
 def reset_sent(request, *args, **kwargs):
-	return 
-
-
-url(r'^reset/$', password_reset, {'template_name': 'reset_form.html', 'email_template_name': 'reset_email.html'}, name = 'password_reset'),
-url(r'^reset/sent/$', password_reset_done, {'template_name': 'reset_done.html'}, name = 'password_reset_done'),
-url(r'^reset/new/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', password_reset_confirm, {'template_name': 'reset_confirm.html'}, name = 'password_reset_confirm'),
-url(r'^reset/complete/$', password_reset_complete, {'template_name': 'reset_complete.html'}, name = 'password_reset_complete'),
-
-
-
-
-
+	if request.user.is_authenticated():
+		return render(request, 'reset_logged_in.html', {})
+	return notification(request, message = '''<p>We've emailed you instructions for setting your password. You should be receiving them shortly.</p>
+		<p>If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder.</p>
+		''', subject = 'Check your mail', next = next)
 
 '''
-	wrapper for django login view
+	the view that the emailed reset link directs to, that actually resets the password
 '''
-@require_GET
-@login_required
-def profile(request, *args, **kwargs):
-	form_profile = ProfileForm(request.POST or None, instance = request.user)
-	form_password = PasswordForm(request.user, request.POST or None)
-	return render(request, 'profile.html', {
-		'form_profile': form_profile,
-		'form_password': form_password,
+def reset_new(request, uid, token):
+	if request.user.is_authenticated():
+		return render(request, 'reset_logged_in.html', {})
+	try:
+		user = get_user_model().objects.get(pk = int(uid))
+	except get_user_model().DoesNotExist:
+		return notification(request, message = 'This password reset link is invalid because a user with id %d does not exist.' % int(uid), subject = 'User not found')
+	if not token == reset_token(user):
+		return notification(request, message = 'This is not a valid reset token for this user. This could happen if it has already been used.', subject = 'Invalid token', next = reverse('password_reset'))
+	form = ResetPasswordForm(user = user, data = request.POST or None)
+	if form.is_valid():
+		form.save()
+		return redirect(to = reverse('password_reset_complete'))
+	return render(request, 'reset_new_password.html', {
+		'form': form,
 	})
 
-
-@require_POST
-@login_required
-def profile_submit(request, *args, **kwargs):
-	form_profile = ProfileForm(request.POST, instance = request.user)
-	if form_profile.is_valid():
-		form_profile.save()
-		return redirect(to = reverse('profile'))
-	return render(request, 'profile.html', {
-		'form_profile': form_profile,
-	})
-
-
-@require_POST
-@login_required
-def profile_password(request, *args, **kwargs):
-	form_password = PasswordForm(request.user, request.POST)
-	if form_password.is_valid():
-		form_password.save()
-		return redirect(to = reverse('profile_password_done'))
-	else:
-		print 'invalid'
-	return render(request, 'profile.html', {
-		'form_password': form_password,
-	})
-
-
-@login_required
-def profile_password_done(request, *args, **kwargs):
-	return notification(request, message = 'Your password has been changed!', subject = 'Password changed', next = reverse('profile'))
+'''
+	password has been updated
+'''
+def reset_complete(request):
+	if request.user.is_authenticated():
+		return render(request, 'reset_logged_in.html', {})
+	return notification(request, message = '''Your password has been set. You may go ahead and log in now.''', subject = 'New password set', next = reverse('login'))
 
 
