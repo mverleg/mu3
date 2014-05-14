@@ -28,10 +28,10 @@ kill $(lsof -t -i:8443) 2>/dev/null;
 printf 'activating virtual environment\n';
 source ./env/bin/activate;
 
-if [[ -e "init.sh" ]];
+if [[ -e "dev/init.sh" ]];
 then
-	printf "source init.sh\n";
-	source init.sh;
+	printf "source dev/init.sh\n";
+	source dev/init.sh;
 else
 	printf "init.sh not found; skipping\n";
 fi

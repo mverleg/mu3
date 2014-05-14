@@ -1,20 +1,19 @@
 
 {% load staticfiles %}
-{% load mu3 %}
+{% load misc %}
 
 
 <!DOCTYPE html>
 <html>{# possibly add lang='en' #}
 	<head>
 		<meta charset='utf-8'>
+		
 		<title>{% block title %}{{ TITLE_BASE }}{% endblock title %}</title>
-		<link rel='stylesheet' href='{% static 'meyer-reset.css' %}' />
-		<link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' />
-		<link rel='stylesheet' href='{% static 'aqua-style.css' %}' />
-		<link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
-		<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
-		<script src='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
-		<script src='{% static 'aqua-script.js' %}'></script>
+		
+        {% include 'default_css_js.html' %}
+		<script src='{% static 'mu3_script.js' %}'></script>
+		<script src='{% static 'base_script.js' %}'></script>
+        
 		{% block header %}
 		{% endblock header %}
 	</head>

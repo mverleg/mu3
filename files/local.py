@@ -9,6 +9,7 @@ from os import path
 
 BASE_DIR = path.dirname(path.dirname(__file__))
 
+SITE_URL = 'markv.nl'
 
 SECRET_KEY = '[secret_key]'
 

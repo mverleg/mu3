@@ -60,24 +60,36 @@ source env/bin/activate;
 # install the mu3 base project for this virtualenv
 # pip install git+https://bitbucket.org/mverleg/mu3;
 #echo "USING LOCAL DIR FOR TESTING PURPOSES";
-pip install ~/mu3 1> /dev/null;
+# pip install ~/mu3;
 
 printf "copying initial project files\n";
 rsync -arhH --ignore-existing $dir/project/ .;
 if [ ! -f source/local.py ];
 then
 	secret_key=$(python -c 'import random; print "".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)])');
-	echo $secret_key
 	sed "s/\[secret_key\]/$secret_key/g" $dir/files/local.py > source/local.py;
 	chmod 600 source/local.py;
 fi
 
+if [[ -e "dev/init.sh" ]];
+then
+	printf "source dev/init.sh\n";
+	source dev/init.sh;
+fi
+
+if ! [ -d "$name" ];
+then
+	printf "symlink project name for IDE's\n";
+	ln -s source $name;
+fi
+
 printf "turning into Eclipse project\n";
-sed "s/\[name\]/$name/g" "$dir/files/project_template" > source/.project;
-sed "s/\[name\]/$name/g" "$dir/files/pydevproject_template" > source/.pydevproject;
+printf "...skipped\n";
+#sed "s/\[name\]/$name/g" "$dir/files/project_template" > source/.project;
+#sed "s/\[name\]/$name/g" "$dir/files/pydevproject_template" > source/.pydevproject;
 name_static=$name"_static";
-sed "s/\[name\]/$name_static/g" "$dir/files/project_template" > static/.project;
-sed "s/\[name\]/$name_static/g" "$dir/files/pydevproject_template" > static/.pydevproject;
+#sed "s/\[name\]/$name_static/g" "$dir/files/project_template" > static/.project;
+#sed "s/\[name\]/$name_static/g" "$dir/files/pydevproject_template" > static/.pydevproject;
 
 printf "setting up ssl testing\n";
 if [ ! -f dev/ssl/devssl.conf ];
@@ -93,17 +105,17 @@ git add -A;
 git commit -m "directory structure for '$name'";
 
 printf 'installing modules for %s\n' "$name";
-#pip install django six django-dbsettings johnny-cache git+https://bitbucket.org/mverleg/django_admin_settings;
-pip install $(cat "$dir/files/pip_list") 1> /dev/null;
+# pip install django six django-dbsettings johnny-cache git+https://bitbucket.org/mverleg/django_admin_settings;
+pip install $(cat "$dir/files/pip_list");
 if [ -f "dev/modules.pip" ];
 then
-	pip install $(cat dev/modules.pip) 1> /dev/null;
+	pip install $(cat dev/modules.pip);
 else
 	pip freeze > dev/modules.pip;
 fi
-pip install git+https://bitbucket.org/mverleg/django_split_models;
-pip install git+https://bitbucket.org/mverleg/django_admin_settings;
-pip install git+https://bitbucket.org/mverleg/django_syncdb_completed;
+# pip install git+https://bitbucket.org/mverleg/django_split_models;
+# pip install git+https://bitbucket.org/mverleg/django_admin_settings;
+# pip install git+https://bitbucket.org/mverleg/django_syncdb_completed;
 
 printf 'creating Django project %s\n' "$name";
 python manage.py syncdb --noinput;

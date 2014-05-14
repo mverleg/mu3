@@ -1,14 +1,14 @@
 
-from settings import BASE_TEMPLATE, BASE_EMAIL_TEMPLATE
+import settings
 
 
 '''
-    put some settings into the default context 
+	put some settings into the default context
+	note that mu3.base has a similar processor; your setting may already be added
 '''
 def context_settings(request):
-    return {
-        'BASE_TEMPLATE': BASE_TEMPLATE,
-        'BASE_EMAIL_TEMPLATE': BASE_EMAIL_TEMPLATE,
-    }
+	return {
+		#'EXAMPLE': settings.EXAMPLE,
+	}
 
 

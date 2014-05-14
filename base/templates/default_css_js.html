@@ -1,0 +1,37 @@
+
+{% comment %}
+    default style sheets and scripts to be included by default in all projects
+    each project can override USE_CDN in settings to use some remote sources
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block css %}
+    <link rel='stylesheet' href='{% static 'meyer-reset.css' %}' />
+    {% if USE_CDN %}
+        <link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' />
+        <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+    {% else %}
+        <link rel='stylesheet' href='{% static 'bootstrap/3.1.1/css/bootstrap.min.css' %}' />
+        <link href='{% static 'font/bitter_stuff.woff' %}' rel='stylesheet' type='text/css'>
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'star_rating/css/star-rating.min.css' %}" media="all" />
+    <link rel='stylesheet' href='{% static 'mu3_style.css' %}' />
+    <link rel='stylesheet' href='{% static 'reactable.css' %}' />
+{% endblock css %}
+
+{% block js %}
+    {% if USE_CDN %}
+        <script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
+        <script src='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
+    {% else %}
+        <script src='{% static 'jquery/2.1.1/jquery.js' %}'></script> {# minor version difference with CDN #}
+        <script src='{% static 'bootstrap/3.1.1/js/bootstrap.min.js' %}'></script>    
+    {% endif %}
+    <script src="{% static 'star_rating/js/star-rating.min.js' %}"></script>
+    <script src='{% static 'mu3_script.js' %}'></script>
+    <script src='{% static 'reactable.js' %}'></script>
+    
+{% endblock js %}
+
+

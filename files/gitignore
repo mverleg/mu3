@@ -1,5 +1,7 @@
 *.pyc
 *.log
 *~
+.idea/
+.settings/
 env/
 source/local.py

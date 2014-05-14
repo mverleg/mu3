@@ -2,8 +2,8 @@
     base settings for mu3-derived projects
 '''
 
-from dogpile.cache import make_region  # @UnresolvedImport
-from django.conf.global_settings import *  # @UnusedWildImport
+from dogpile.cache import make_region
+from django.conf.global_settings import *
 from os import path
 BASE_DIR = path.dirname(path.dirname(__file__))
 
@@ -22,8 +22,9 @@ mem_cache = make_region().configure(
 
 
 TEMPLATE_CONTEXT_PROCESSORS += (
-    'django.core.context_processors.request',
+    'django.core.context_processors.request', 
     'admin_settings.context_processors.admin_settings', 
+	'mu3.base.context.context_settings.context_settings', 
 )
 
 DATABASES = {
@@ -55,8 +56,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'mu3.base',
     'crispy_forms',
     'admin_settings',
+	'muuser',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,9 +108,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
@@ -117,5 +117,10 @@ LOGIN_REDIRECT_URL = '/account/profile/'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 CRISPY_FAIL_SILENTLY = not DEBUG
+
+PREPEND_WWW = True
+APPEND_SLASH = True
+
+USE_CDN = False
 
 
