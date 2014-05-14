@@ -2,4 +2,5 @@
 *.pyc
 *~
 todo.txt
+.idea/
 env/

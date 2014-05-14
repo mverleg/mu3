@@ -17,7 +17,7 @@
 	<p>{{ message|safe }}</p>
 	
 	{% if home_button %}
-	<a href="{% url 'home' %}" class="btn btn-success btn-large"><i class="icon-white icon-ok"></i> Okay</a>
+	    <a href="{% url 'home' %}" class="btn btn-success btn-large"><i class="icon-white icon-ok"></i> Okay</a>
 	{% endif %}
 	{% if next %}
 		<a href="{{ next }}" class='btn btn-primary btn-large'><i class='icon-white icon-play'></i> Next</a>
