@@ -30,11 +30,16 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 	'base.context.context_settings.context_settings',
 )
 
-EMAIL_HOST = 'smtp.mail.google.com'
-EMAIL_HOST_USER = 'markdjangosmtptest424'
-EMAIL_HOST_PASSWORD = 'ta7hbjv4762F'
+STATICFILES_DIRS += (
+	path.join(BASE_DIR, 'dev/bower'),
+)
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'mdilligaf'
+EMAIL_HOST_PASSWORD = 'froink42'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
 
 SITE_URL = 'markv.nl'
 

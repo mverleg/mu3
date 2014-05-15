@@ -5,3 +5,6 @@
 .settings/
 env/
 source/local.py
+data/
+dev/bower/
+static/

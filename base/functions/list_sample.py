@@ -1,6 +1,6 @@
 
 
-''' 
+'''
 	given an ordered collection (list, tuple, ...), return a string representation
 	of the first limit items (or fewer), e.g. "itemA, itemB, itemC and 7 more"
 '''

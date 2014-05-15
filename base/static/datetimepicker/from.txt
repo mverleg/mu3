@@ -1,1 +1,2 @@
-http://tarruda.github.io/bootstrap-datetimepicker/
+http://momentjs.com/
+https://github.com/Eonasdan/bootstrap-datetimepicker

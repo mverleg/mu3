@@ -1,15 +1,18 @@
 
+'''
+	decorators that, for a view given post data, shows a page with a message that 
+	lets the user confirm or cancel the action (an extra step as failsafe)
+		@confirm_first('are you sure you want to do this?')
+		def delete_everything(request);
+'''
+
 from django.shortcuts import render
 
 
 CONFIRM_FIELD_NAME = 'confirmed'
 
-'''
-	a decorator that, for a view given post data, shows a page with a message that 
-	lets the user confirm or cancel the action (an extra step as failsafe)
-'''
 def confirm_first(message, subject = '', submit_text = 'continue', submit_class = 'btn-success', confirm_field_name = CONFIRM_FIELD_NAME):
-	def actual_decorator(func):
+	def actual_decorator(view_func):
 		def wrapped_func(request, *args, **kwargs):
 			''' check if this is a POST request and whether it's already confirmed '''
 			if request.method == 'POST':
@@ -25,7 +28,7 @@ def confirm_first(message, subject = '', submit_text = 'continue', submit_class 
 						'confirm_field_name': confirm_field_name,
 					})
 			''' not submitting or already confirmed '''
-			return func(request, *args, **kwargs)
+			return view_func(request, *args, **kwargs)
 		return wrapped_func
 	return actual_decorator
 

@@ -104,15 +104,23 @@ printf 'adding changes to git\n';
 git add -A;
 git commit -m "directory structure for '$name'";
 
-printf 'installing modules for %s\n' "$name";
+printf 'installing bower modules for %s\n' "$name";
+bower install $(cat ~/django_mu3/files/bower_list);
+if [ -f "dev/modules.pip" ];
+then
+	bower install;
+fi
+bower_freeze > dev/bower.json;
+
+printf 'installing pip modules for %s\n' "$name";
 # pip install django six django-dbsettings johnny-cache git+https://bitbucket.org/mverleg/django_admin_settings;
 pip install $(cat "$dir/files/pip_list");
 if [ -f "dev/modules.pip" ];
 then
 	pip install $(cat dev/modules.pip);
-else
-	pip freeze > dev/modules.pip;
 fi
+pip freeze > dev/modules.pip;
+
 # pip install git+https://bitbucket.org/mverleg/django_split_models;
 # pip install git+https://bitbucket.org/mverleg/django_admin_settings;
 # pip install git+https://bitbucket.org/mverleg/django_syncdb_completed;

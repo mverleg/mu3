@@ -3,7 +3,8 @@ from django.utils.html import escape, mark_safe
 from django import template
 from mu3.base.functions.list_sample import list_sample
 from mu3.base.functions.obfuscate import obfuscate_letter
-from base.functions.html_filter import html_filter
+from mu3.base.functions.html_filter import html_filter
+from random import random
 
 
 register = template.Library()
@@ -25,10 +26,14 @@ def obfuscate(clear, mi = 32, ma = 126):
 ''' 
 	given an ordered collection (list, tuple, ...), return a string representation
 	of the first limit items (or fewer), e.g. "itemA, itemB, itemC and 7 more"
+	rsample does the sample, but shuffles the first 50 items and picks from that
 '''
-@register.filter(name = 'shortlisttxt')
-def shortlisttxt(collection, limit = 3):
+@register.filter(name = 'sample')
+def sample(collection, limit = 3):
 	return list_sample(collection, limit)
+@register.filter(name = 'rsample')
+def rsample(collection, limit = 3):
+	return list_sample(sorted(collection[:50], key = lambda x: random()), limit)
 
 
 ''' 

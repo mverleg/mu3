@@ -41,25 +41,45 @@ $(document).ready(function() {
 	});
 	
 	/*
-		date, time and datetime pickers
+		update classes and html to make datepicker work
 	*/
-	$('.date-time-picker').each(function(k) {
+	$('.datetimeinput').each(function(k) {
+		$(this).parent().addClass('input-group date insert-datetimeinput');
+		$(this).next().remove();
+		$(this).after('<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>');
+	});
+	$('.dateinput').each(function(k) {
+		$(this).parent().addClass('input-group date insert-dateinput');
+		$(this).next().remove();
+		$(this).after('<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>');
+	});
+	$('.timeinput').each(function(k) {
+		$(this).parent().addClass('input-group date insert-timeinput');
+		$(this).next().remove();
+		$(this).after('<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>');
+	});
+	/*
+		now attach the datepickers
+	*/
+	$('.insert-datetimeinput').each(function(k) {
 		$(this).datetimepicker({
-			pickSeconds: false,
-			pick12HourFormat: false
+			sideBySide: true, 
+			showToday: true,
+			minuteStepping: 5,
+			useSeconds: false,
 		});
 	});
-	$('.date-picker').each(function(k) {
+	$('.insert-dateinput').each(function(k) {
 		$(this).datetimepicker({
 			pickTime: false,
-			pickSeconds: false
+			showToday: true,
 		});
 	});
-	$('.time-picker').each(function(k) {
+	$('.insert-timeinput').each(function(k) {
 		$(this).datetimepicker({
 			pickDate: false,
-			pickSeconds: false,
-			pick12HourFormat: false
+			minuteStepping: 5,
+			useSeconds: false,
 		});
 	});
 });

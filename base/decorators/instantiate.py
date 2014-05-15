@@ -1,7 +1,4 @@
 
-from django.http import Http404
-
-
 '''
 	decorator for functions that take a unique model attribute as
 	url parameter (or other string argument), and convert that 
@@ -14,6 +11,10 @@ from django.http import Http404
 	uses primary key by default, with modelname as instance kwarg 
 	and modelname_pk as input string kwargs (can all be changed)
 '''
+
+from django.http import Http404
+
+
 def instantiate(Model, in_kw_name = None, out_kw_name = None, model_attr_name = 'pk', model_attr_type = int):
 	if out_kw_name is None:
 		out_kw_name = Model.__name__.lower()

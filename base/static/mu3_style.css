@@ -13,7 +13,7 @@
 	font-family: 'Bitter';
 	font-style: normal;
 	font-weight: 400;
-	src: local('Bitter-Regular'), url(font/bitter-stuff.woff) format('woff');
+	src: local('Bitter-Regular'), url(font/bitter_stuff.woff) format('woff');
 }
 
 [title]
@@ -31,6 +31,11 @@ body
 	font-family: 'Bitter', 'Serif';
 	font-size: 14px;
 	background: url(blue_stripes.png);
+}
+
+ol, ul
+{
+	margin: 0px;
 }
 
 a
@@ -94,6 +99,7 @@ form
 #menu_bar_left, #menu_bar_right
 {
 	position: absolute;
+	list-style-type: none;
 }
 
 #menu_bar_left

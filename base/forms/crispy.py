@@ -1,7 +1,8 @@
 
 from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Button
+from crispy_forms.layout import Submit, Button, Field
+from crispy_forms.bootstrap import AppendedText
 from django.core.urlresolvers import reverse
 
 
@@ -43,4 +44,16 @@ class SimpleCrispyModelForm(ModelForm):
 		)
 		super(SimpleCrispyModelForm, self).__init__(data, *args, **kwargs)
 
+
+"""
+class DateField(Field):
+	def __init__(self, *args, **kwargs):
+		wrapper_class = 'date-picker input-append'
+		if 'wrapper_class' in kwargs.keys():
+			wrapper_class = '%s %s' % (wrapper_class, kwargs.pop('wrapper_class'))
+		super(DateField, self).__init__(*args, wrapper_class = wrapper_class, **kwargs)
+
+#	'field_name', wrapper_class="extra-class")
+AppendedText('field_name', '<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>')
+"""
 
