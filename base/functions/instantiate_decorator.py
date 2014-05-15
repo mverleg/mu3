@@ -23,7 +23,6 @@ def instantiate(Model, in_kw_name = None, out_kw_name = None, model_attr_name = 
 		def func_with_instance(request, *args, **kwargs):
 			identifier = kwargs.pop(in_kw_name)
 			try:
-				print {model_attr_name: model_attr_type(identifier)}
 				instance = Model.objects.get(**{model_attr_name: model_attr_type(identifier)})
 			except Model.DoesNotExist:
 				message = 'This page expectes a %s with %s = %s, but no such %s was found.' % (Model.__name__, model_attr_name, identifier, Model.__name__)

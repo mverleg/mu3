@@ -39,6 +39,29 @@ $(document).ready(function() {
 		var clear = deobfuscate(cypher);
 		$(this).replaceWith(clear);
 	});
+	
+	/*
+		date, time and datetime pickers
+	*/
+	$('.date-time-picker').each(function(k) {
+		$(this).datetimepicker({
+			pickSeconds: false,
+			pick12HourFormat: false
+		});
+	});
+	$('.date-picker').each(function(k) {
+		$(this).datetimepicker({
+			pickTime: false,
+			pickSeconds: false
+		});
+	});
+	$('.time-picker').each(function(k) {
+		$(this).datetimepicker({
+			pickDate: false,
+			pickSeconds: false,
+			pick12HourFormat: false
+		});
+	});
 });
 
 

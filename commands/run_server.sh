@@ -45,6 +45,7 @@ sleep 0.3;
 if [ -n "$(ps aux | awk '{print $2 }' | grep "$stunnel_pid")" ];
 then
 	HTTPS=1 python manage.py runserver 0.0.0.0:8001 --traceback & # the https server
+	printf " for https use post :8443 (NOT 8001)\n";
 	https_pid=$!;
 else
 	printf "\nSTUNNEL4 TERMINATED; ONLY HTTP SERVER STARTING (NOT HTTPS)\n\n";

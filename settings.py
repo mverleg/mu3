@@ -69,6 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'mu3.base.middleware.secure.RequireSecureMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -121,6 +122,22 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 PREPEND_WWW = True
 APPEND_SLASH = True
 
+SESSION_COOKIE_NAME = 'session'
+CSRF_COOKIE_NAME = 'csrf'
+
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+
+NOSCR_ALLOWED_TAGS = 'p:title h1:title h2:title h3:title div:title span:title a:href:title img:src:alt:title table:cellspacing:cellpadding tbody th tr td:title:colspan:rowspan ol ul li:title br'
+
 USE_CDN = False
+
+SESSION_COOKIE_SECURE = False
+AUTH_REQUIRE_SECURE = False
+DESECURE_AFTER_LOGOUT = False
+REQUIRE_SECURE_PATHS = [
+	'/admin/',
+	'/account/',
+]
 
 

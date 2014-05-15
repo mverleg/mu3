@@ -11,6 +11,7 @@ def context_settings(request):
 		'BASE_TEMPLATE':        settings.BASE_TEMPLATE,
 		'BASE_EMAIL_TEMPLATE':  settings.BASE_EMAIL_TEMPLATE,
 		'USE_CDN':              settings.USE_CDN,
+		#'AUTH_REQUIRE_SECURE':  settings.AUTH_REQUIRE_SECURE,
 	}
 
 
