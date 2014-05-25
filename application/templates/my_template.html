@@ -1,6 +1,14 @@
 
 {% extends BASE_TEMPLATE %}
 
+{% load ext %}
+
+
+{% block title %}
+    My page
+	{{ TITLE_SEPARATOR }}
+	{{ block.super }}
+{% endblock title %}
 
 {% block content %}
 	

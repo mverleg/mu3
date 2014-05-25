@@ -1,7 +1,16 @@
+
+{% load statix_tags %}
+
+
 {% block footer %}
+    {% if request.user.is_superuser %}    
+        <a href="{% url 'dump-data' %}">backup</a> /
+    {% endif %}
 	{% if request.user.is_staff %}
 		<a href="/admin/">admin</a> / 
 	{% endif %}
-	<a href="{% url 'credits' %}">credits</a> / 
-	<a href="{% url 'contact' %}">contact</a>
+	<a href="{% statix_url 'credits' %}">credits</a> / 
+	<a href="{% statix_url 'contact' %}">contact</a>
 {% endblock footer %}
+
+        

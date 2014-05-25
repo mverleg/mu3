@@ -18,3 +18,10 @@ DATABASES['default'] = {
     'NAME': path.join(BASE_DIR, 'data/default.sqlite3'),
 }
 
+SITE_URL = 'markv.nl'
+
+ALLOWED_HOSTS = ['.%s' % SITE_URL]
+
+DEBUG = True
+
+

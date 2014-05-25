@@ -35,7 +35,7 @@ def initial_data(*args, **kwargs):
 	
 	if not Setting.objects.filter(name = 'CONTACT_PAGE'):
 		Setting(name = u'CONTACT_PAGE', value = u'''
-			{% load misc %}
+			{% load ext %}
 			<p>Feel free to contact us; we can be reached in many ways:</p>
 			<p>Email: {{ "company@spam.la"|obfuscate }}</p>
 			<p>Phone: 06 1234 5678</p>

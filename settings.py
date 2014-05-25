@@ -1,5 +1,5 @@
 '''
-    base settings for mu3-derived projects
+	base settings for mu3-derived projects
 '''
 
 from dogpile.cache import make_region
@@ -13,32 +13,33 @@ BASE_DIR = path.dirname(path.dirname(__file__))
 
 
 mem_cache = make_region().configure(
-    'dogpile.cache.pylibmc',
-    expiration_time = 150,
-    arguments = {
-        'url':['127.0.0.1'],
-    }
+	'dogpile.cache.pylibmc',
+	expiration_time = 150,
+	arguments = {
+		'url':['127.0.0.1'],
+	}
 ).cache_on_arguments()
 
 
 TEMPLATE_CONTEXT_PROCESSORS += (
-    'django.core.context_processors.request', 
-    'admin_settings.context_processors.admin_settings', 
-	'mu3.base.context.context_settings.context_settings', 
+	'django.core.context_processors.request', 
+	'admin_settings.context_processors.admin_settings', 
+	'misc.context.context_settings.context_settings', 
+	'misc.context.javascript_settings.javascript_settings',
 )
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', 
-        'NAME': '%s/data/default.sqlite3' % BASE_DIR,
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3', 
+		'NAME': '%s/data/default.sqlite3' % BASE_DIR,
+	}
 }
 
 ''' path of the site-wide base template, which should contain a {% block content %} '''
 BASE_TEMPLATE = 'mu3_base.html'
 
 TEMPLATE_LOADERS = (
-    'django.template.loaders.app_directories.Loader',
+	'django.template.loaders.app_directories.Loader',
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -51,25 +52,26 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-	'mu3.base',
-    'crispy_forms',
-    'admin_settings',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+	'misc',
+	'crispy_forms',
+	'admin_settings',
 	'muuser',
+	'smuggler',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'mu3.base.middleware.secure.RequireSecureMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'misc.middleware.secure.RequireSecureMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -79,20 +81,20 @@ WSGI_APPLICATION = 'wsgi.application'
 # johhny database cache does not work in Django 1.6 yet, turn this on when it does
 """
 if False:
-    MIDDLEWARE_CLASSES = (
-        'johnny.middleware.LocalStoreClearMiddleware',
-        'johnny.middleware.QueryCacheMiddleware',
-    ) + MIDDLEWARE_CLASSES
-    
-    CACHES = {
-        'default' : dict(
-             BACKEND = 'johnny.backends.memcached.MemcachedCache',
-             LOCATION = ['127.0.0.1:11211'],
-             JOHNNY_CACHE = True,
-        )
-    }
-    
-    JOHNNY_MIDDLEWARE_KEY_PREFIX = 'jc_admin_settings' # automatically
+	MIDDLEWARE_CLASSES = (
+		'johnny.middleware.LocalStoreClearMiddleware',
+		'johnny.middleware.QueryCacheMiddleware',
+	) + MIDDLEWARE_CLASSES
+	
+	CACHES = {
+		'default' : dict(
+			 BACKEND = 'johnny.backends.memcached.MemcachedCache',
+			 LOCATION = ['127.0.0.1:11211'],
+			 JOHNNY_CACHE = True,
+		)
+	}
+	
+	JOHNNY_MIDDLEWARE_KEY_PREFIX = 'jc_admin_settings' # automatically
 """
 
 # Internationalization
@@ -108,6 +110,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATETIME_INPUT_FORMATS = ('%Y-%m-%d %H:%M',) + DATETIME_INPUT_FORMATS
+DATE_INPUT_FORMATS = ('%Y-%m-%d',) + DATE_INPUT_FORMATS
+TIME_INPUT_FORMATS = ('%H:%M',) + TIME_INPUT_FORMATS
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
@@ -139,5 +144,8 @@ REQUIRE_SECURE_PATHS = [
 	'/admin/',
 	'/account/',
 ]
+
+SMUGGLER_EXCLUDE_LIST = ['sessions.Session',]
+SMUGGLER_INDENT = 0
 
 

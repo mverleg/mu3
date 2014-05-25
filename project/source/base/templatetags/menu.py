@@ -10,6 +10,6 @@ def conditional_active_class(context, url_name):
 	if 'request' in context:
 		url = reverse(url_name)
 		if context['request'].path == url:
-			return u'menu_active'
+			return u'active'
 
 

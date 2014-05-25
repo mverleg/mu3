@@ -1,8 +1,8 @@
 
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from mu3.base.views.notification import notification
-from mu3.base.views.setting_flatpage import setting_flatpage
+from misc.views.notification import notification
+from misc.views.setting_flatpage import setting_flatpage
 
 
 admin.autodiscover()

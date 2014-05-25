@@ -20,14 +20,18 @@ AUTH_USER_MODEL = 'account.MyUser'
 INSTALLED_APPS += (
 	'base',
 	'account',
+	'statix',
 	
 	'django.contrib.admin',
 )
 
 MEDIA_ROOT = path.join(BASE_DIR, 'data')
 
+STATIX_URL = '/'
+
 TEMPLATE_CONTEXT_PROCESSORS += (
 	'base.context.context_settings.context_settings',
+	'base.context.javascript_settings.javascript_settings',
 )
 
 STATICFILES_DIRS += (
@@ -39,12 +43,5 @@ EMAIL_HOST_USER = 'mdilligaf'
 EMAIL_HOST_PASSWORD = 'froink42'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
-
-SITE_URL = 'markv.nl'
-
-ALLOWED_HOSTS = ['.%s' % SITE_URL]
-
-DEBUG = True
 
 
