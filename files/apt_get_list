@@ -2,4 +2,3 @@ python-virtualenv
 stunnel4
 git
 openssl
-django-smuggler
