@@ -26,6 +26,7 @@ INSTALLED_APPS += (
 )
 
 MEDIA_ROOT = path.join(BASE_DIR, 'data')
+STATIC_ROOT = path.join(BASE_DIR, 'static')
 
 STATIX_URL = '/'
 
