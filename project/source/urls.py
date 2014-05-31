@@ -1,8 +1,11 @@
 
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-import smuggler.urls
-import base.urls, account.urls, statix.urls
+from misc.views.notification import notification
+import smuggler.urls, statix.urls
+import account.urls
+
+
 admin.autodiscover()
 
 
@@ -11,7 +14,7 @@ urlpatterns = patterns('',
 	url(r'^account/', include(account.urls)),
 	url(r'^admin/', include(smuggler.urls)),
 	url(r'^admin/', include(admin.site.urls)),
-	url(r'^', include(base.urls)),
+	url(r'^home/$', notification, {'subject': 'Welcome', 'message': 'This is the default home page. More will probably appear soon!', 'home_button': False}, name = 'home'),
 	url(r'^', include(statix.urls)),
 )
 

@@ -1,39 +1,13 @@
 
-{% load staticfiles %}
-{% load ext %}
+{% extends 'aqua/base.html' %}
 
 
-<!DOCTYPE html>
-<html>{# possibly add lang='en' #}
-	<head>
-		<meta charset='utf-8'>
-		
-		<title>{% block title %}{{ TITLE_BASE }}{% endblock title %}</title>
-		
-        {% include 'default_css_js.html' %}
-		<script src='{% static 'mu3_script.js' %}'></script>
-		<script src='{% static 'base_script.js' %}'></script>
-        
-		{% block header %}
-		{% endblock header %}
-	</head>
-	<body>
-		<div id='menu_bar'>
-			{% include 'menu.html' %}
-		</div>
-		<div id='page'>
-			<div id='content'>
-				{% block content %}
-					
-					empty document
-					
-				{% endblock content %}
-			</div>
-			<div id='footer'>
-				{% include 'footer.html' %}
-			</div>
-		</div>
-	</body>
-</html>
+{% block menu %}
+    {# <li><a class="{% if_url 'stuff' %}" href='{% url 'stuff' %}'><i class="glyphicon glyphicon-heart"></i> stuff</a></li> #}
+{% endblock menu %}
+
+{% block content %}
+    empty document for project's base.html
+{% endblock content %}
 
 

@@ -20,6 +20,7 @@ AUTH_USER_MODEL = 'account.MyUser'
 INSTALLED_APPS += (
 	'base',
 	'account',
+	'reactables',
 	'statix',
 	
 	'django.contrib.admin',

@@ -2,8 +2,12 @@ django
 six
 pytz
 pylibmc
+pillow
+beautifulsoup4
 dogpile.cache
 django-reversion
 django_crispy_forms
 django-model-utils
 django-smuggler
+django_resized
+django-autoslug

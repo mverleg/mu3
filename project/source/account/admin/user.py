@@ -10,11 +10,8 @@ class MyUserAdmin(MuUserAdmin):
 	fieldsets = MuUserAdmin.fieldsets
 	fieldsets.insert(2, ['Address', {'fields': ADDRESS_FIELDSET}])
 	readonly_fields = MuUserAdmin.readonly_fields + ADDRESS_READONLY_FIELDS
-	
-	class Meta:
-		model = MyUser
 
 
-admin.site.register(MyUserAdmin)
+admin.site.register(MyUser, MyUserAdmin)
 
 

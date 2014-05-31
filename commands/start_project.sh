@@ -63,7 +63,14 @@ source env/bin/activate;
 # pip install ~/mu3;
 
 printf "copying initial project files\n";
-rsync -arhH --ignore-existing $dir/project/ .;
+rsync -larhH --ignore-existing --exclude source/* $dir/project/ .;
+for appdir in $dir/project/source/*/
+do
+    if [ ! -e "source/$(basename $appdir)" ]
+    then
+        /bin/cp -rnp "$dir/project/source/$(basename $appdir)" "source/$(basename $appdir)"
+    fi
+done
 if [ ! -f source/local.py ];
 then
 	secret_key=$(python -c 'import random; print "".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)])');
@@ -105,25 +112,21 @@ git add -A;
 git commit -m "directory structure for '$name'";
 
 printf 'installing bower modules for %s\n' "$name";
-bower install $(cat ~/django_mu3/files/bower_list);
+bower --no-color install -q $(cat ~/.mymods/mu3/files/bower_list);
 if [ -f "dev/modules.pip" ];
 then
-	bower install;
+	bower install --no-color -q;
 fi
 bower_freeze > dev/bower.json;
 
 printf 'installing pip modules for %s\n' "$name";
-# pip install django six django-dbsettings johnny-cache git+https://bitbucket.org/mverleg/django_admin_settings;
-pip install $(cat "$dir/files/pip_list");
+# pip -q install django six django-dbsettings johnny-cache git+https://bitbucket.org/mverleg/django_admin_settings;
+pip -q install $(cat "$dir/files/pip_list");
 if [ -f "dev/modules.pip" ];
 then
-	pip install $(cat dev/modules.pip);
+	pip -q install $(cat dev/modules.pip);
 fi
 pip freeze > dev/modules.pip;
-
-# pip install git+https://bitbucket.org/mverleg/django_split_models;
-# pip install git+https://bitbucket.org/mverleg/django_admin_settings;
-# pip install git+https://bitbucket.org/mverleg/django_syncdb_completed;
 
 printf 'creating Django project %s\n' "$name";
 python manage.py syncdb --noinput;
