@@ -6,6 +6,7 @@ pillow
 beautifulsoup4
 dogpile.cache
 requests
+haystack
 pyelasticsearch
 django-reversion
 django_crispy_forms
