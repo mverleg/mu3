@@ -5,6 +5,8 @@ pylibmc
 pillow
 beautifulsoup4
 dogpile.cache
+requests
+pyelasticsearch
 django-reversion
 django_crispy_forms
 django-model-utils

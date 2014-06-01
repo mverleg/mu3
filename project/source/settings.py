@@ -46,4 +46,6 @@ EMAIL_HOST_PASSWORD = 'froink42'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
 

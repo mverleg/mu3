@@ -46,6 +46,8 @@ then
 	return;
 fi
 
+source $dir/commands/fix_permissions.sh;
+
 printf 'adding everything to git\n';
 git add -A;
 git commit -q -m "initial commit for '$name'";
@@ -102,13 +104,15 @@ then
 	cat dev/ssl/devssl.key dev/ssl/devssl.cert > dev/ssl/devssl.pem;
 fi
 
+source $dir/commands/fix_permissions.sh;
+
 printf 'adding changes to git\n';
 git add -A;
 git commit -q -m "directory structure for '$name'";
 
 printf 'installing bower modules for %s\n' "$name";
 bower --no-color install -q $(cat ~/.mymods/mu3/files/bower_list);
-if [ -f "dev/modules.pip" ];
+if [ -f "dev/bower.json" ];
 then
 	bower install --no-color -q;
 fi
@@ -117,14 +121,16 @@ bower_freeze > dev/bower.json;
 printf 'installing pip modules for %s\n' "$name";
 # pip -q install django six django-dbsettings johnny-cache git+https://bitbucket.org/mverleg/django_admin_settings;
 pip -q install $(cat "$dir/files/pip_list");
-if [ -f "dev/modules.pip" ];
+if [ -f "dev/pip.txt" ];
 then
-	pip -q install $(cat dev/modules.pip);
+	pip -q install $(cat dev/pip.txt);
 fi
-pip freeze > dev/modules.pip;
+pip freeze > dev/pip.txt;
 
 printf 'creating database for %s\n' "$name";
 python manage.py syncdb -v0 --noinput;
+
+source $dir/commands/fix_permissions.sh;
 
 printf 'adding changes to git\n';
 git add -A;

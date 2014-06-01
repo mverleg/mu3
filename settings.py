@@ -20,6 +20,13 @@ mem_cache = make_region().configure(
 	}
 ).cache_on_arguments()
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
 
 TEMPLATE_CONTEXT_PROCESSORS += (
 	'django.core.context_processors.request', 
@@ -62,6 +69,7 @@ INSTALLED_APPS = (
 	'admin_settings',
 	'muuser',
 	'smuggler',
+	'haystack',
 )
 
 MIDDLEWARE_CLASSES = (

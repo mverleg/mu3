@@ -11,14 +11,15 @@ from statix.models import Page
 
 INITIAL_USER = 'mark.verleg@gmail.com'
 
-def initial_data(*args, **kwargs):
+def initial_data(verbosity, *args, **kwargs):
 	'''
 		initialize display parameters (as settings)
 	'''
 	if not Setting.objects.filter(name = 'TITLE_BASE'):
 		Setting(name = 'TITLE_BASE', value = '(change in admin)', explanation = 'the base part of the title of pages', type = STR, template = 2).save()
 		Setting(name = 'TITLE_SEPARATOR', value = '&laquo;', explanation = 'the base part of the title of pages', type = STR, template = 2).save()
-		print 'created display settings'
+		if verbosity:
+			print 'created display settings'
 	'''
 		initialize pages
 	'''
@@ -33,7 +34,8 @@ def initial_data(*args, **kwargs):
 				{# #todo #}
 			</ul>
 		'''.replace('\t', '')).save()
-		print 'created credits page'
+		if verbosity:
+			print 'created credits page'
 	if not Page.objects.filter(path = 'contact'):
 		Page(path = 'contact', title = 'Contact', content = '''
 			{% load ext %}
@@ -44,12 +46,14 @@ def initial_data(*args, **kwargs):
 			<p>Address: etc etc</p>
 			<p>Messenger pigeon: on Wednesday, have your pigeon deliver your message in the garden of aforementioned address, if weather allows</p>
 		'''.replace('\t', '')).save()
-		print 'created contact page'
+		if verbosity:
+			print 'created contact page'
 	if not Page.objects.filter(path = 'about'):
 		Page(path = 'about', title = 'About', content = '''
 			{% load statix_tags %}
 			<h1>About</h1>
 			<p>We are the best ones!</p>
 		'''.replace('\t', '')).save()
-		print 'created about page'
+		if verbosity:
+			print 'created about page'
 

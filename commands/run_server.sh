@@ -36,11 +36,23 @@ else
 	printf "init.sh not found; skipping\n";
 fi
 
-printf 'setting permissions\n';
-chmod 750 . -R;
-chmod 770 data -R;
+source $dir/commands/fix_permissions.sh;
 
-printf 'make sure memcached is running\n  sudo service memcached start;\n';
+for service in 'memcached' 'elasticsearch';
+do
+	if [[ $(service $service status) =~ 'is not running' ]];
+	then
+		if [ "$(id -u)" != "0" ];
+		then
+			printf 'SERVICE %s NOT RUNNING!\n superuser can start it like this:\n sudo service memchached start\n' $service;
+		else
+			printf 'starting memcached (sudo)...\n';
+			sudo service $service start;
+		fi
+	else
+		printf '%s is already running\n' $service;
+	fi
+done
 
 printf "starting ssl server\n";
 stunnel4 dev/ssl/devssl.conf &> /dev/null &
