@@ -48,23 +48,18 @@ fi
 
 printf 'adding everything to git\n';
 git add -A;
-git commit -m "initial commit for '$name'";
+git commit -q -m "initial commit for '$name'";
 
 # create and activate virtual environment
 if ! [ -d "env" ];
 then
-	virtualenv env;
+	virtualenv -q env;
 fi
 source env/bin/activate;
 
-# install the mu3 base project for this virtualenv
-# pip install git+https://bitbucket.org/mverleg/mu3;
-#echo "USING LOCAL DIR FOR TESTING PURPOSES";
-# pip install ~/mu3;
-
 printf "copying initial project files\n";
 rsync -larhH --ignore-existing --exclude source/* $dir/project/ .;
-for appdir in $dir/project/source/*/
+for appdir in $dir/project/source/*
 do
     if [ ! -e "source/$(basename $appdir)" ]
     then
@@ -109,7 +104,7 @@ fi
 
 printf 'adding changes to git\n';
 git add -A;
-git commit -m "directory structure for '$name'";
+git commit -q -m "directory structure for '$name'";
 
 printf 'installing bower modules for %s\n' "$name";
 bower --no-color install -q $(cat ~/.mymods/mu3/files/bower_list);
@@ -129,11 +124,11 @@ fi
 pip freeze > dev/modules.pip;
 
 printf 'creating Django project %s\n' "$name";
-python manage.py syncdb --noinput;
+python manage.py syncdb -v=0 --noinput;
 
 printf 'adding changes to git\n';
 git add -A;
-git commit -m "other structural files for '$name'";
+git commit -q -m "other structural files for '$name'";
 
 printf "type 'deactivate' to leave virtualenv\n";
 

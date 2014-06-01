@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 	url(r'^account/', include(account.urls)),
 	url(r'^admin/', include(smuggler.urls)),
 	url(r'^admin/', include(admin.site.urls)),
-	url(r'^home/$', notification, {'subject': 'Welcome', 'message': 'This is the default home page. More will probably appear soon!', 'home_button': False}, name = 'home'),
+	url(r'^$', notification, {'subject': 'Welcome', 'message': 'This is the default home page. More will probably appear soon!', 'home_button': False}, name = 'home'),
 	url(r'^', include(statix.urls)),
 )
 
