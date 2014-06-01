@@ -123,7 +123,7 @@ fi
 pip freeze > dev/modules.pip;
 
 printf 'creating Django project %s\n' "$name";
-python manage.py syncdb -v=0 --noinput;
+python manage.py syncdb -v 0 --noinput;
 
 printf 'adding changes to git\n';
 git add -A;
