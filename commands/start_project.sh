@@ -57,12 +57,14 @@ then
 fi
 source env/bin/activate;
 
-printf "copying initial project files\n";
-rsync -larhH --ignore-existing --exclude source/* $dir/project/ .;
+printf "copying supporting files\n";
+rsync -larhH --ignore-existing --exclude=source/* $dir/project/ .;
+printf "copying django files\n";
 for appdir in $dir/project/source/*
 do
     if [ ! -e "source/$(basename $appdir)" ]
     then
+        echo ">>> from $dir/project/source/$(basename $appdir) to source/$(basename $appdir)"
         /bin/cp -rnp "$dir/project/source/$(basename $appdir)" "source/$(basename $appdir)"
     fi
 done
@@ -122,8 +124,8 @@ then
 fi
 pip freeze > dev/modules.pip;
 
-printf 'creating Django project %s\n' "$name";
-python manage.py syncdb -v 0 --noinput;
+printf 'creating database for %s\n' "$name";
+python manage.py syncdb -v0 --noinput;
 
 printf 'adding changes to git\n';
 git add -A;

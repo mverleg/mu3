@@ -9,10 +9,15 @@
 	https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 '''
 
-import os
+from sys import path
+from os import environ
+from os.path import dirname, abspath, join
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'source.settings')
+BASE_NAME = dirname(abspath(__file__))
+path.append(join(BASE_NAME, 'source'))
+path.append(join(BASE_NAME, '/mods/incl'))
+environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 
 application = get_wsgi_application()
 

@@ -36,8 +36,9 @@ else
 	printf "init.sh not found; skipping\n";
 fi
 
-printf 'setting permissions to 750\n';
+printf 'setting permissions\n';
 chmod 750 . -R;
+chmod 770 data -R;
 
 printf 'make sure memcached is running\n  sudo service memcached start;\n';
 
