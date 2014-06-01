@@ -64,7 +64,6 @@ for appdir in $dir/project/source/*
 do
     if [ ! -e "source/$(basename $appdir)" ]
     then
-        echo ">>> from $dir/project/source/$(basename $appdir) to source/$(basename $appdir)"
         /bin/cp -rnp "$dir/project/source/$(basename $appdir)" "source/$(basename $appdir)"
     fi
 done
