@@ -70,7 +70,6 @@ if [ ! -f source/local.py ];
 then
 	secret_key=$(python -c 'import random; print "".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)])');
 	sed "s/\[secret_key\]/$secret_key/g" $dir/files/local.py > source/local.py;
-	chmod 600 source/local.py;
 fi
 
 if [[ -e "dev/init.sh" ]];
