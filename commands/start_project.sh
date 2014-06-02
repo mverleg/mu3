@@ -46,8 +46,6 @@ then
 	return;
 fi
 
-source $dir/commands/fix_permissions.sh;
-
 printf 'adding everything to git\n';
 git add -A;
 git commit -q -m "initial commit for '$name'";
@@ -104,8 +102,6 @@ then
 	cat dev/ssl/devssl.key dev/ssl/devssl.cert > dev/ssl/devssl.pem;
 fi
 
-source $dir/commands/fix_permissions.sh;
-
 printf 'adding changes to git\n';
 git add -A;
 git commit -q -m "directory structure for '$name'";
@@ -129,8 +125,6 @@ pip freeze > dev/pip.txt;
 
 printf 'creating database for %s\n' "$name";
 python manage.py syncdb -v0 --noinput;
-
-source $dir/commands/fix_permissions.sh;
 
 printf 'adding changes to git\n';
 git add -A;

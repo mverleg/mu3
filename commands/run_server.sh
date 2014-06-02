@@ -36,8 +36,6 @@ else
 	printf "init.sh not found; skipping\n";
 fi
 
-source $dir/commands/fix_permissions.sh;
-
 for service in 'memcached' 'elasticsearch';
 do
 	if [[ $(service $service status) =~ 'is not running' ]];
