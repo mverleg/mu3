@@ -6,7 +6,7 @@
 '''
 
 
-def initial_data(*args, **kwargs):
+def initial_data(verbosity, *args, **kwargs):
     '''
         create an admin user
     '''
@@ -15,7 +15,8 @@ def initial_data(*args, **kwargs):
         first_user = MuUser(username = INITIAL_USER, is_staff = True, is_superuser = True)
         first_user.set_password('admin')
         first_user.save()
-        print 'created initual user \'%s\'; please change password a.s.a.p.' % INITIAL_USER
+        if verbosity:
+            print 'created initual user \'%s\'; please change password a.s.a.p.' % INITIAL_USER
     """
 
 

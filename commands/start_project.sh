@@ -57,8 +57,9 @@ then
 fi
 source env/bin/activate;
 
-printf "copying initial project files\n";
-rsync -larhH --ignore-existing --exclude source/* $dir/project/ .;
+printf "copying supporting files\n";
+rsync -larhH --ignore-existing --exclude=source/* $dir/project/ .;
+printf "copying django files\n";
 for appdir in $dir/project/source/*
 do
     if [ ! -e "source/$(basename $appdir)" ]
@@ -70,7 +71,6 @@ if [ ! -f source/local.py ];
 then
 	secret_key=$(python -c 'import random; print "".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)])');
 	sed "s/\[secret_key\]/$secret_key/g" $dir/files/local.py > source/local.py;
-	chmod 600 source/local.py;
 fi
 
 if [[ -e "dev/init.sh" ]];
@@ -108,7 +108,7 @@ git commit -q -m "directory structure for '$name'";
 
 printf 'installing bower modules for %s\n' "$name";
 bower --no-color install -q $(cat ~/.mymods/mu3/files/bower_list);
-if [ -f "dev/modules.pip" ];
+if [ -f "dev/bower.json" ];
 then
 	bower install --no-color -q;
 fi
@@ -117,14 +117,19 @@ bower_freeze > dev/bower.json;
 printf 'installing pip modules for %s\n' "$name";
 # pip -q install django six django-dbsettings johnny-cache git+https://bitbucket.org/mverleg/django_admin_settings;
 pip -q install $(cat "$dir/files/pip_list");
-if [ -f "dev/modules.pip" ];
+if [ -f "dev/pip.txt" ];
 then
-	pip -q install $(cat dev/modules.pip);
+	pip -q install $(cat dev/pip.txt);
 fi
-pip freeze > dev/modules.pip;
+pip freeze > dev/pip.txt;
 
+<<<<<<< HEAD
 printf 'creating Django project %s\n' "$name";
 python manage.py syncdb -v 0 --noinput;
+=======
+printf 'creating database for %s\n' "$name";
+python manage.py syncdb -v0 --noinput;
+>>>>>>> c447f2290de132d34bf367a714be78248d0072f2
 
 printf 'adding changes to git\n';
 git add -A;
