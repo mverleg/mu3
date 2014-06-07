@@ -123,13 +123,8 @@ then
 fi
 pip freeze > dev/pip.txt;
 
-<<<<<<< HEAD
-printf 'creating Django project %s\n' "$name";
-python manage.py syncdb -v 0 --noinput;
-=======
 printf 'creating database for %s\n' "$name";
 python manage.py syncdb -v0 --noinput;
->>>>>>> c447f2290de132d34bf367a714be78248d0072f2
 
 printf 'adding changes to git\n';
 git add -A;
