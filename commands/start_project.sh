@@ -51,6 +51,7 @@ git add -A;
 git commit -q -m "initial commit for '$name'";
 
 # create and activate virtual environment
+mkdir -p data static;
 if ! [ -d "env" ];
 then
 	virtualenv -q env;
