@@ -19,9 +19,10 @@ setup(
     description='base for my Django projects',
     zip_safe=False,
     install_requires = [
-    	'django',
-    	'django-reversion',
-#    	'django-profiles',
-#		'django-uni-forms',
+    	'django', 
+    	'django-reversion', 
+#    	'django-profiles', 
+#		'django-uni-forms', 
+	    #todo
     ],
 )

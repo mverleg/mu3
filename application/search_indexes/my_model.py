@@ -6,7 +6,7 @@ from haystack import indexes
 """
 class MyModelIndex(indexes.SearchIndex, indexes.Indexable):
 	
-	text = indexes.CharField(document = True, use_template = True)
+	text = indexes.CharField(document = True, use_template = True, template_name = 'index_mymodel.txt')
 	name = indexes.CharField(model_attr = 'name')
 	date = indexes.DateTimeField(model_attr = 'date')
 	
@@ -16,5 +16,4 @@ class MyModelIndex(indexes.SearchIndex, indexes.Indexable):
 	def index_queryset(self, using = None):
 		return self.get_model().objects.filter(date__lte = timezone.now())
 """
-
 
