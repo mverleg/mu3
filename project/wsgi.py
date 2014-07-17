@@ -16,7 +16,7 @@ from django.core.wsgi import get_wsgi_application
 
 BASE_NAME = dirname(abspath(__file__))
 path.append(join(BASE_NAME, 'source'))
-path.append(join(BASE_NAME, '/mods/incl'))
+path.append(join(BASE_NAME, '/mods/py/incl'))
 environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 
 application = get_wsgi_application()
