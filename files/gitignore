@@ -7,4 +7,6 @@ env/
 source/local.py
 data/
 dev/bower/
+dev/ssl/
 static/
+
