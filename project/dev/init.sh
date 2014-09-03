@@ -1,1 +1,1 @@
-export PYTHONPATH=/home/mark/.mymods
+export PYTHONPATH=/home/mark/mods/PY
