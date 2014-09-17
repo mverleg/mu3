@@ -1,9 +1,9 @@
 #!/bin/bash
 
-## 
+##
 ## create a Django project in the current directory which has the
 ## name of said directory, including virtualenv, git, base apps etc
-## 
+##
 
 name=${PWD##*/};
 dir="$( dirname $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ))";
@@ -108,7 +108,7 @@ git add -A;
 git commit -q -m "directory structure for '$name'";
 
 printf 'installing bower modules for %s\n' "$name";
-bower --no-color install -q $(cat ~/.mymods/mu3/files/bower_list);
+bower --no-color install -q $(cat ~/mods/PY/mu3/files/bower_list);
 if [ -f "dev/bower.json" ];
 then
 	bower install --no-color -q;
@@ -136,7 +136,7 @@ printf "type 'deactivate' to leave virtualenv\n";
 
 
 # test-based development
-# 
+#
 # user should add a git remote
 
 

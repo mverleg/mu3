@@ -3,10 +3,11 @@
 *~
 .idea/
 .settings/
-env/
-source/local.py
-data/
-dev/bower/
-dev/ssl/
-static/
+/env/
+/source/local.py
+/data/
+/dev/bower/
+/dev/ssl/
+/static/
+tmp/
 
