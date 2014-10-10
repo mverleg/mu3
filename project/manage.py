@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-'''
+
+"""
 	Run management commands.
-	
+
 	Created by mu3.
-'''
+"""
 
 import sys
 from os import path, environ

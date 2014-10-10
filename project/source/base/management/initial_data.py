@@ -1,8 +1,8 @@
 
-'''
+"""
 	create initial data for this model, on syncdb
 	make sure to check if it doesn't yet exist
-'''
+"""
 
 from admin_settings import Setting
 from statix.models.page import Page
@@ -11,9 +11,9 @@ from statix.models.page import Page
 INITIAL_USER = 'mark.verleg@gmail.com'
 
 def initial_data(verbosity, *args, **kwargs):
-	'''
+	"""
 		initialize display parameters (as settings)
-	'''
+	"""
 	if not Setting.objects.filter(name = 'TITLE_BASE'):
 		Setting(name = 'TITLE_BASE', value = '(change in admin)', explanation = 'the base part of the title of pages', type = Setting.STR, template = 2).save()
 		Setting(name = 'TITLE_SEPARATOR', value = '&laquo;', explanation = 'the base part of the title of pages', type = Setting.STR, template = 2).save()

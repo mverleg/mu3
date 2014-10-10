@@ -1,6 +1,7 @@
-'''
+
+"""
 	base settings for mu3-derived projects
-'''
+"""
 
 from dogpile.cache import make_region
 from django.conf.global_settings import *
@@ -21,25 +22,25 @@ mem_cache = make_region().configure(
 ).cache_on_arguments()
 
 HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
-        'INDEX_NAME': 'haystack',
-    },
+	'default': {
+		'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+		'URL': 'http://127.0.0.1:9200/',
+		'INDEX_NAME': 'haystack',
+	},
 }
 HAYSTACK_ITERATOR_LOAD_PER_QUERY = HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
 HAYSTACK_LIMIT_TO_REGISTERED_MODELS = True
 
 TEMPLATE_CONTEXT_PROCESSORS += (
-	'django.core.context_processors.request', 
-	'admin_settings.context_processors.admin_settings', 
-	'misc.context.context_settings.context_settings', 
+	'django.core.context_processors.request',
+	'admin_settings.context_processors.admin_settings',
+	'misc.context.context_settings.context_settings',
 	'misc.context.javascript_settings.javascript_settings',
 )
 
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.sqlite3', 
+		'ENGINE': 'django.db.backends.sqlite3',
 		'NAME': '%s/data/default.sqlite3' % BASE_DIR,
 	}
 }
@@ -95,7 +96,7 @@ if False:
 		'johnny.middleware.LocalStoreClearMiddleware',
 		'johnny.middleware.QueryCacheMiddleware',
 	) + MIDDLEWARE_CLASSES
-	
+
 	CACHES = {
 		'default' : dict(
 			 BACKEND = 'johnny.backends.memcached.MemcachedCache',
@@ -103,7 +104,7 @@ if False:
 			 JOHNNY_CACHE = True,
 		)
 	}
-	
+
 	JOHNNY_MIDDLEWARE_KEY_PREFIX = 'jc_admin_settings' # automatically
 """
 
@@ -157,5 +158,7 @@ REQUIRE_SECURE_PATHS = [
 
 SMUGGLER_EXCLUDE_LIST = ['sessions.Session',]
 SMUGGLER_INDENT = None
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 
