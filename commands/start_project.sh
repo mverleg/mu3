@@ -131,6 +131,12 @@ printf 'adding changes to git\n';
 git add -A;
 git commit -q -m "other structural files for '$name'";
 
+
+
+printf 'adding initial documentation to git\n';
+git add -A;
+git commit -q -m "other structural files for '$name'";
+
 printf "type 'deactivate' to leave virtualenv\n";
 
 

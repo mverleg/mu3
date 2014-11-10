@@ -1,17 +1,13 @@
 
-"""
-	create initial data for this model, on syncdb
-	make sure to check if it doesn't yet exist
-"""
-
 from django.contrib.auth import get_user_model
 
 
 INITIAL_USER = 'mark.verleg@gmail.com'
 
+
 def initial_data(verbosity, *args, **kwargs):
 	"""
-		create an admin user
+		Create an admin user when the user table is created.
 	"""
 	if not get_user_model().objects.filter(email = INITIAL_USER):
 		get_user_model().objects.create_superuser(email = INITIAL_USER, password = 'admin').save()

@@ -22,7 +22,7 @@ INSTALLED_APPS += (
 	'account',
 	'reactables',
 	'statix',
-	
+
 	'django.contrib.admin',
 )
 
@@ -37,7 +37,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 )
 
 STATICFILES_DIRS += (
-	path.join(BASE_DIR, 'dev/bower'),
+	path.join(BASE_DIR, 'env/bower'),
 )
 
 EMAIL_HOST = 'smtp.sendgrid.net'
