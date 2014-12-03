@@ -1,5 +1,5 @@
 
-'''
+"""
     load models in this directory so they can be imported as
         from models import ModelName
     or
@@ -8,7 +8,7 @@
     note that django <= 1.6 also needs each model to have
         class Meta:
             app_label = 'namehere'
-'''
+"""
 
 from split_models import load_models
 

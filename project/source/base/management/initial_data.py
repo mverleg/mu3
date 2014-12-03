@@ -19,9 +19,9 @@ def initial_data(verbosity, *args, **kwargs):
 		Setting(name = 'TITLE_SEPARATOR', value = '&laquo;', explanation = 'the base part of the title of pages', type = Setting.STR, template = 2).save()
 		if verbosity:
 			print 'created display settings'
-	'''
+	"""
 		initialize pages
-	'''
+	"""
 	if not Page.objects.filter(path = 'credits'):
 		Page(path = 'credits', title = 'Credits', content = '''
 			<h1>Credits</h1>

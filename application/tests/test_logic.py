@@ -2,6 +2,7 @@
 """
 	Note: the function and file name have to start with test.
 	Adding __init__.py not recommended.
+	Run with: py.test (e.g. from the project directory)
 """
 
 
