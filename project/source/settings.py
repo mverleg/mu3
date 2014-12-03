@@ -1,12 +1,13 @@
 
-'''
+"""
 	specific settings for your project;
 	always extend existing lists
-'''
+"""
 
 from mu3.settings import *
 from local import *
 from os import path
+from django.utils.translation import ugettext_lazy as _
 
 
 BASE_DIR = path.dirname(path.dirname(__file__))
@@ -22,6 +23,7 @@ INSTALLED_APPS += (
 	'account',
 	'reactables',
 	'statix',
+	'modeltranslation',
 
 	'django.contrib.admin',
 )
@@ -47,5 +49,11 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+LANGUAGES = (
+	('en', _('English')),
+	('ne', _('Dutch')),
+	#('zh', _('Mandarin')),  # using Simplified Chinese
+)
 
 
