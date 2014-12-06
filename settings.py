@@ -31,7 +31,12 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_ITERATOR_LOAD_PER_QUERY = HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
 HAYSTACK_LIMIT_TO_REGISTERED_MODELS = True
 
-TEMPLATE_CONTEXT_PROCESSORS += (
+TEMPLATE_CONTEXT_PROCESSORS = (
+	'django.contrib.auth.context_processors.auth',
+	#'django.core.context_processors.i18n',     # LANGAUGES, LANGUAGE_CODE
+	#'django.core.context_processors.media',   # MEDIA_URL
+	#'django.core.context_processors.static',  # STATIC_URL
+	#'django.core.context_processors.tz',      # TIME_ZONE
 	'django.core.context_processors.request',
 	'admin_settings.context_processors.admin_settings',
 	'misc.context.context_settings.context_settings',
@@ -77,6 +82,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
 	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.locale.LocaleMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -111,14 +117,11 @@ if False:
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'en'
 USE_I18N = True
-
 USE_L10N = True
 
+TIME_ZONE = 'UTC'
 USE_TZ = True
 
 DATETIME_INPUT_FORMATS = ('%Y-%m-%d %H:%M',) + DATETIME_INPUT_FORMATS
@@ -160,5 +163,9 @@ SMUGGLER_EXCLUDE_LIST = ['sessions.Session',]
 SMUGGLER_INDENT = None
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
+#PREFIX_DEFAULT_LOCALE = True
+#LOCALEURL_USE_ACCEPT_LANGUAGE = True
+#LOCALE_REDIRECT_PERMANENT = False
 
 

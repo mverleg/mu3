@@ -24,19 +24,19 @@ INSTALLED_APPS += (
 	'reactables',
 	'statix',
 	'modeltranslation',
-
 	'django.contrib.admin',
 )
 
-MEDIA_ROOT = path.join(BASE_DIR, 'data')
-STATIC_ROOT = path.join(BASE_DIR, 'static')
-
-STATIX_URL = '/'
-
 TEMPLATE_CONTEXT_PROCESSORS += (
+	'django.core.context_processors.i18n',     # LANGAUGES, LANGUAGE_CODE
 	'base.context.context_settings.context_settings',
 	'base.context.javascript_settings.javascript_settings',
 )
+
+MEDIA_ROOT = path.join(BASE_DIR, 'media')
+STATIC_ROOT = path.join(BASE_DIR, 'static')
+
+STATIX_URL = '/'
 
 STATICFILES_DIRS += (
 	path.join(BASE_DIR, 'env/bower'),

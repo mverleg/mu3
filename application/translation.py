@@ -5,11 +5,11 @@ from modeltranslation.translator import translator, TranslationOptions
 
 
 class MyModelTranslation(TranslationOptions):
-	fields = ('name', 'text',)
+	fields = ('name',)
 	required_languages = {
-		'ne': ('name', 'text'),
+		'ne': ('name',),
 		'en': ('name',),
-		'zh': ('name',),
+		'zh': (),
 	}
 
 
