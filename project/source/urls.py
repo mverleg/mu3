@@ -6,7 +6,7 @@ from django.contrib import admin
 from haystack.views import SearchView
 from misc.views.notification import notification
 import smuggler.urls, statix.urls
-import account.urls
+from . import account.urls
 
 
 admin.autodiscover()

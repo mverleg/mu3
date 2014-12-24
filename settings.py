@@ -74,9 +74,9 @@ INSTALLED_APPS = (
 	'django.contrib.staticfiles',
 	'misc',
 	'crispy_forms',
-	'admin_settings',
+	#'admin_settings',
 	'muuser',
-	'smuggler',
+	#'smuggler',
 	'haystack',
 )
 

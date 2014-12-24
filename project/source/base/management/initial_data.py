@@ -18,7 +18,7 @@ def initial_data(verbosity, *args, **kwargs):
 		Setting(name = 'TITLE_BASE', value = '(change in admin)', explanation = 'the base part of the title of pages', type = Setting.STR, template = 2).save()
 		Setting(name = 'TITLE_SEPARATOR', value = '&laquo;', explanation = 'the base part of the title of pages', type = Setting.STR, template = 2).save()
 		if verbosity:
-			print 'created display settings'
+			print('created display settings')
 	"""
 		initialize pages
 	"""
@@ -34,7 +34,7 @@ def initial_data(verbosity, *args, **kwargs):
 			</ul>
 		'''.replace('\t', '')).save()
 		if verbosity:
-			print 'created credits page'
+			print('created credits page')
 	if not Page.objects.filter(path = 'contact'):
 		Page(path = 'contact', title = 'Contact', content = '''
 			{% load ext %}
@@ -46,7 +46,7 @@ def initial_data(verbosity, *args, **kwargs):
 			<p>Messenger pigeon: on Wednesday, have your pigeon deliver your message in the garden of aforementioned address, if weather allows</p>
 		'''.replace('\t', '')).save()
 		if verbosity:
-			print 'created contact page'
+			print('created contact page')
 	if not Page.objects.filter(path = 'about'):
 		Page(path = 'about', title = 'About', content = '''
 			{% load statix_tags %}
@@ -54,5 +54,5 @@ def initial_data(verbosity, *args, **kwargs):
 			<p>We are the best ones!</p>
 		'''.replace('\t', '')).save()
 		if verbosity:
-			print 'created about page'
+			print('created about page')
 

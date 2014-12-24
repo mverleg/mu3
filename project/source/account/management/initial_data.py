@@ -12,6 +12,6 @@ def initial_data(verbosity, *args, **kwargs):
 	if not get_user_model().objects.filter(email = INITIAL_USER):
 		get_user_model().objects.create_superuser(email = INITIAL_USER, password = 'admin').save()
 		if verbosity:
-			print 'created initial user \'%s\' with password \'admin\'; please change the password a.s.a.p.' % INITIAL_USER
+			print('created initial user \'%s\' with password \'admin\'; please change the password a.s.a.p.' % INITIAL_USER)
 
 

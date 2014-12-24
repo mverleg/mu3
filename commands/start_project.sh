@@ -55,6 +55,8 @@ mkdir -p data static media;
 if ! [ -d "env" ];
 then
 	virtualenv -q env;
+	# for Python3 use:
+	# virtualenv -q -p /usr/bin/python3.4 env
 fi
 source env/bin/activate;
 

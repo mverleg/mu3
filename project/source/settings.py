@@ -25,6 +25,8 @@ INSTALLED_APPS += (
 	'statix',
 	'modeltranslation',
 	'django.contrib.admin',
+	'admin_settings',
+	'smuggler',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS += (

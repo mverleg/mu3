@@ -10,7 +10,7 @@ from setuptools import find_packages
 setup(
 	name='mu3',
 	version='0.0.1',
-	author=u'Mark V',
+	author='Mark V',
 	author_email='noreply.mail.nl',
 	packages=find_packages(),
 	include_package_data=True,
