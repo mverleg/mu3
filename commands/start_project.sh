@@ -39,7 +39,7 @@ if ! [ -d ".git" ];
 then
 	printf "creating git repository and making initial commit\n";
 	git init;
-	cp $dir/files/gitignore .gitignore;
+	cp -n $dir/files/gitignore .gitignore;
 elif [ -z "$(git commit --dry-run | grep 'nothing to commit')" ];
 then
 	printf "this directory is already a git repository and has non-committed changes; please commit any changes and consider if you want to create a project in an active git directory\n";
@@ -54,9 +54,13 @@ git commit -q -m "initial commit for '$name'";
 mkdir -p data static media;
 if ! [ -d "env" ];
 then
-	virtualenv -q env;
+	# for python 2 use:
+	# virtualenv -q env;
 	# for Python3 use:
-	# virtualenv -q -p /usr/bin/python3.4 env
+	virtualenv -q -p /usr/bin/python3.4 env
+	ln -s /usr/lib/python3/dist-packages/numpy env/lib/python3.4/site-packages/
+	ln -s /usr/lib/python3/dist-packages/scipy env/lib/python3.4/site-packages/
+	ln -s /usr/lib/python3/dist-packages/matplotlib env/lib/python3.4/site-packages/
 fi
 source env/bin/activate;
 
@@ -72,7 +76,7 @@ do
 done
 if [ ! -f source/local.py ];
 then
-	secret_key=$(python -c 'import random; print "".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)])');
+	secret_key=$(python -c 'import random; print("".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)]))');
 	sed "s/\[secret_key\]/$secret_key/g" $dir/files/local.py > source/local.py;
 fi
 
@@ -99,7 +103,7 @@ name_static=$name"_static";
 printf "setting up ssl testing\n";
 if [ ! -f dev/ssl/devssl.conf ];
 then
-	cp $dir/files/dev_https_config dev/ssl/devssl.conf;
+	cp -n $dir/files/dev_https_config dev/ssl/devssl.conf;
 	openssl genrsa 1024 > dev/ssl/devssl.key;
 	openssl req -new -x509 -nodes -sha256 -days 365 -key dev/ssl/devssl.key -batch > dev/ssl/devssl.cert;
 	cat dev/ssl/devssl.key dev/ssl/devssl.cert > dev/ssl/devssl.pem;
@@ -133,7 +137,7 @@ printf 'adding changes to git\n';
 git add -A;
 git commit -q -m "other structural files for '$name'";
 
-
+#todo: make documentation
 
 printf 'adding initial documentation to git\n';
 git add -A;

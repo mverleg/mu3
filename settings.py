@@ -74,7 +74,7 @@ INSTALLED_APPS = (
 	'django.contrib.staticfiles',
 	'misc',
 	'crispy_forms',
-	#'admin_settings',
+	'admin_settings',  # mu3 doesn't work without this
 	'muuser',
 	#'smuggler',
 	'haystack',

@@ -25,7 +25,6 @@ INSTALLED_APPS += (
 	'statix',
 	'modeltranslation',
 	'django.contrib.admin',
-	'admin_settings',
 	'smuggler',
 )
 
