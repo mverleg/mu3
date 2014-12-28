@@ -1,7 +1,7 @@
 pid=
 
 cert = dev/ssl/devssl.pem
-sslVersion = SSLv3
+sslVersion = all
 foreground = yes
 output = dev/ssl/stunnel.log
 
