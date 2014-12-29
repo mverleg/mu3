@@ -151,9 +151,9 @@ NOSCR_ALLOWED_TAGS = 'p:title h1:title h2:title h3:title div:title span:title a:
 
 USE_CDN = False
 
-SESSION_COOKIE_SECURE = False
-AUTH_REQUIRE_SECURE = False
-DESECURE_AFTER_LOGOUT = False
+SESSION_COOKIE_SECURE = False  # django setting
+DESECURE_AFTER_LOGOUT = False  # muuser setting, redirect to http after logout
+AUTH_REQUIRE_SECURE = False  # muuser setting, enables the below secure paths and @conditional_redirect_to_secure
 REQUIRE_SECURE_PATHS = [
 	'/admin/',
 	'/account/',
