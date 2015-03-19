@@ -1,9 +1,9 @@
 #!/bin/bash
 
-## 
+##
 ## run test server on localhost :8000, including https version
 ## and virtual environment
-## 
+##
 
 dir="$( dirname $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ))";
 
@@ -53,12 +53,12 @@ do
 done
 
 printf "starting ssl server\n";
-stunnel4 dev/ssl/devssl.conf &> /dev/null &
+stunnel4 dev/ssl/devssl.conf &> /dev/null || return &
 stunnel_pid=$!;
 sleep 0.3;
 if [ -n "$(ps aux | awk '{print $2 }' | grep "$stunnel_pid")" ];
 then
-	HTTPS=1 python manage.py runserver 0.0.0.0:8001 --traceback & # the https server
+	HTTPS=1 python manage.py runserver 0.0.0.0:8001 --traceback || return & # the https server
 	printf " for https use post :8443 (NOT 8001)\n";
 	https_pid=$!;
 else
@@ -70,7 +70,7 @@ sleep 0.7;
 if [[ ! -n "$(ps aux | awk '{print $2 }' | grep "$stunnel_pid")" || -n "$(ps aux | awk '{print $2 }' | grep "$https_pid")" ]];
 then
 	printf "starting http server\n";
-	python manage.py runserver 0.0.0.0:8000 --traceback ; # the http server
+	python manage.py runserver 0.0.0.0:8000 --traceback # the http server
 	printf " stopping\n";
 else
 	printf "http server not starting because https failed\n";

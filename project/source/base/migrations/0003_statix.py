@@ -12,7 +12,8 @@ def initial_pages(apps, schema_editor):
 			<ul>
 				<li>Python: the server-side language <a href="https://www.python.org/">python.org</a></li>
 				<li>Django: the web development framework <a href="https://www.djangoproject.com/">djangoproject.com</a></li>
-				<li>jQuery: client-side library for javascript <a href="http://jquery.com/">jquery.com</a></li>
+				<li>jQuery: front-end library for javascript <a href="http://jquery.com/">jquery.com</a></li>
+				<li>Bootstrap: front-end layout library <a href="http://getbootstrap.com/">getbootstrap.com</a></li>
 				{# #todo #}
 			</ul>
 		'''.replace('\t', '')).save()
